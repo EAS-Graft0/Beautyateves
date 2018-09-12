@@ -1,0 +1,18 @@
+<div class="text-center">
+  <h3>Beauty at Eves</h3>
+  <hr>
+  <div>
+    <p>Welcome to Beauty at Eve's.</p>
+    <p>One of the best beauticians in Caerphilly.</p>
+    <p>We have a huge range of treatments, which you can find on the treatments page.</p>
+  </div>
+  <div>
+    <h3>Opening Hours</h3>
+    <hr>
+    <div>
+      <ul>
+        <li ng-repeat="hours in openingHours" ng-bind="hours.day + ' - ' + hours.time"><span ng-if="!hours.day">Closed</span></li>
+      </ul>
+    </div>
+  </div>
+</div>

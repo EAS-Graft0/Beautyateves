@@ -1,0 +1,68 @@
+<style type="text/css" media="screen">
+.day {
+  display: inline-table;
+  width: 13%;
+  height: 13%;
+  margin: 4px;
+  box-shadow: inset 0 0 3px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.day:hover {
+  background: white;
+}
+
+.week {
+  display: inline-table;
+  width: 13%;
+  margin: 4px;
+  text-align: center;
+}
+
+.calendar {
+  box-shadow: inset 0 0 3px;
+  padding: 10px;
+  padding-top: 20px;
+  background: whitesmoke;
+}
+
+.disabled {
+  background: grey;
+  user-select: none;
+  cursor: auto;
+}
+
+.disabled:hover {
+  background: grey;
+}
+
+.booking {
+  margin: 5px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  border: solid 2px azure;
+  padding: 10px;
+  border-radius: 5px;
+  background: azure;
+}
+
+</style>
+<div>
+  <div class="row" style="padding: 30px; overflow: hidden; display: inline-flex">
+    <span ng-repeat="booking in bookings track by $index" ng-bind="booking.name + ' - ' + (booking.date | date:'short')" class="booking"></span>
+  </div>
+  <div ng-init="getBookings(2)" class="calendar">
+    <div>
+      <div ng-repeat="day in week" ng-bind="day" class="week"></div>
+    </div>
+    <div class="day" ng-repeat="i in getNumber(first) track by $index"> &nbsp</div>
+    <!-- <div ng-repeat="day in days" class="day" ng-click="viewDay(day)"> -->
+    <div ng-repeat="day in days" class="day" ng-click="viewDay(day)" ng-class="{disabled: day==bookings[0].date}">
+      <small ng-bind="day | date"></small>
+    </div>
+  </div>
+  <div ng-init="selectedYear(2018)">
+    <div ng-init="getDaysArray(6)">
+    </div>
+  </div>

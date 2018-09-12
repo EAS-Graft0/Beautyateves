@@ -1,0 +1,34 @@
+<div>
+  <div class="text-center">
+    <h3>Inventory</h3>
+    <hr>
+  </div>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Desciption</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Recommended</th>
+          <th>Qty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="inv in inventory">
+          <td ng-bind="inv.id"></td>
+          <td ng-bind="inv.name"></td>
+          <td ng-bind="inv.desc"></td>
+          <td ng-bind="inv.price"></td>
+          <td ng-bind="inv.qty"></td>
+          <td ng-bind="inv.recommended"></td>
+          <td>
+            <input ng-model="inv.orderQty" type="text" placeholder="Qty">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

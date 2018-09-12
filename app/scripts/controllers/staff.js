@@ -1,0 +1,19 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name beautyatevesApp.controller:StaffCtrl
+ * @description
+ * # StaffCtrl
+ * Controller of the beautyatevesApp
+ */
+angular.module('beautyatevesApp')
+    .controller('StaffCtrl', function($scope, $http) {
+        $http.get("http://192.168.0.8:86/api/getstaff").then(function(response) {
+            var staff = response.data
+            for (var s in staff) {
+                staff[s].skills = staff[s].skills.split(',')
+            }
+            $scope.staffMembers = staff
+        })
+    });

@@ -1,0 +1,14 @@
+<div>
+  <div class="text-center">
+    <h3>Shop</h3>
+    <hr>
+  </div>
+  <div>
+    <div ng-repeat="item in items" class="text-center">
+      <div class="itemImg" style="background: url({{item.img}});">
+      </div>
+      <h4 ng-bind="item.name"></h4>
+      <span ng-bind="item.desc"></span>
+    </div>
+  </div>
+</div>

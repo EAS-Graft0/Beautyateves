@@ -1,0 +1,112 @@
+<style type="text/css" media="screen">
+.treatmentCat {
+  position: relative;
+  border: solid transparent;
+  height: 75;
+  width: 75;
+  display: inline-block;
+  text-align: center;
+  transition: ease all .25s;
+  cursor: pointer;
+}
+
+.catIcon {
+  margin: 0 auto;
+  line-height: 80px;
+  padding: 15px 5px 5px;
+  min-height: 50px;
+  max-width: 100px;
+}
+
+img {
+  width: auto;
+  height: auto;
+  max-height: 40px;
+  max-width: 180px;
+  border-radius: 50%;
+}
+
+.treatment {
+  position: relative;
+  border: solid transparent;
+  min-height: 200px;
+  /*height: 250px;*/
+  width: 200px;
+  display: inline-table;
+  margin: 5px auto;
+  text-align: center;
+  transition: ease all .25s;
+}
+
+.treatment:hover,
+.treatmentCat:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border: solid 2px hotpink;
+  border-radius: 5px;
+}
+
+.myBtn {
+  border: 1px solid transparent;
+  padding: 3px 70px;
+  margin: 10px;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  color: white;
+  background-color: #0075a8;
+  border-color: #0075a8;
+  vertical-align: bottom;
+  position: absolute;
+  bottom: 5px;
+  cursor: pointer;
+}
+
+</style>
+<div>
+  <div class="text-center" style="border: solid 3px lightpink; padding: 10px; margin: 10px; ">
+    <h2>Treatments</h2>
+    <div class="row" style="text-align: center">
+      <div class="treatmentCat" ng-repeat="cat in categories" ng-click="selectCat(cat)">
+        <div class="catIcon">
+          <img src="{{cat.icon}}">
+        </div>
+        <span ng-bind="cat.name"></span>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <div ng-repeat="treatment in treatments" ng-if="selectedCat==treatment.category" class="treatment">
+      <img src="https://i.pinimg.com/originals/b3/54/ce/b354ce6c6367453b9beb7e3a5bc429f5.png">
+      <h4 class="text-center" ng-bind="treatment.name"></h4>
+      <div class="col-md-6">
+        <div class="glyphicon glyphicon-time"></div>
+        <div ng-bind="treatment.duration"></div>
+      </div>
+      <div class="col-md-6">
+        <div class="glyphicon glyphicon-gbp"></div>
+        <div ng-bind="treatment.price | currency:'£'"></div>
+      </div>
+      <small ng-bind="treatment.description"></small>
+      <div class="myBtn" ng-click="getAvailability(treatment.skill_id)">Book</div>
+    </div>
+  </div>
+</div>
+<!-- <div style="border: solid black 2px; width: 500px; height: 500px; z-index: 100; position: fixed; left: 0px; top: 0px; margin: 15px; background: hotpink;">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Date<th>
+        <th>Staff<th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="slot in availability | orderBy:'date'">
+        <td ng-bind="slot.date | date:'short'"></td>
+        <td></td>
+        <td ng-bind="slot.first_name + ' ' + slot.last_name"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+ -->
