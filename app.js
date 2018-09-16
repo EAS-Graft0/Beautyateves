@@ -26,6 +26,76 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json())
 
+/* NEW WEB SERVICES */
+
+//staff can change their availability
+//same system for holidays
+
+//need to create rotor based on availability
+
+app.get("/api/getRotor", (req, res) => {
+    dbHelper.getData("SELECT staff.id as staff_id, first_name, date FROM rotor JOIN staff on staff.id = rotor.staff_id").then((result) => {
+        res.send(result)
+    })
+})
+
+
+app.post("/api/createSlots", (req, res) => {
+    //timeslots
+    var intervals = ["00", "15", "30", "45"];
+    var timeslots = [];
+    for (let i = 9; i < 17; i++) {
+        for (let j in intervals) {
+            if (i < 10) {
+                timeslots.push("0" + i + ':' + intervals[j]);
+            } else {
+                timeslots.push(i + ":" + intervals[j]);
+            }
+        }
+    }
+    //timeslots
+
+    for (let i in req.body) {
+        // console.log(i)
+        // console.log(req.body[i])
+        for (let j in req.body[i]) {
+            for (let k in timeslots) {
+                // console.log(i + ' ' + timeslots[k])
+                dbHelper.getData("INSERT INTO available_slots (staff_id, date) VALUES (" + req.body[i][j].id + ",'" + (i + ' ' + timeslots[k]) + "')")
+            }
+        }
+    }
+    res.send('Created slots for current rotor')
+
+    // for (let i in result) {
+    //     console.log(result[i])
+    //     dbHelper.getData("INSERT INTO availabile_slots (staff_id, date) VALUES (" + req.body.staff_id + "," + result[i].date + ")").then((res) => {
+    //         console.log(res)
+    //     })
+    // }
+})
+
+app.get("/api/getAvailableSlots", (req, res) => {
+    dbHelper.getData("SELECT * FROM availabile_slots").then((result) => {
+        res.json(result) //this needs to filter on treatment or day? or something?!?
+    })
+})
+
+//based on rotor create available slots 
+
+//create available slots
+
+//get available slots
+
+//create booking
+
+//get bookings - schedule for the day
+
+
+
+/* NEW WEB SERVICES */
+
+
 app.get("/api/getTreatments", (req, res) => {
     dbHelper.getData("SELECT * FROM treatments").then((result) => {
         res.send(result)

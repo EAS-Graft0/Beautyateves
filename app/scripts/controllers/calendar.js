@@ -12,7 +12,7 @@ angular.module('beautyatevesApp')
 
         // $scope.getAvailability = function(id) {
         	// console.log('here')
-            $http.get("http://192.168.0.8:86/api/getAvailability?skillID=1").then(function(response) {		
+            $http.get("http://localhost:86/api/getAvailability?skillID=1").then(function(response) {		
                 $scope.availability = response.data
             })
         // }

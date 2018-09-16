@@ -1,14 +1,7 @@
-/**
- * @ngdoc function
- * @name beautyatevesApp.controller:BookingsCtrl
- * @description
- * # BookingsCtrl
- * Controller of the beautyatevesApp
- */
 angular.module('beautyatevesApp')
     .controller('BookingsCtrl', function($scope, $http) {
         $scope.getBookings = function(id) {
-            $http.get("http://192.168.0.8:86/api/getBookings?staffID=" + id).then(function(response) {
+            $http.get("http://localhost:86/api/getBookings?staffID=" + id).then(function(response) {
                 console.log($scope.bookings)
                 response.data.push(response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0], response.data[0])
                 $scope.bookings = response.data

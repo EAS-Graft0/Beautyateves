@@ -12,13 +12,13 @@ angular.module('beautyatevesApp')
         // $scope.categories = ["Wax", "Nails", "Eyebrows", "Lashes", "Tattoo", "Skin", "Tan", "Makeup", "Botox"]
 
         $scope.getTreatments = function() {
-            $http.get("http://192.168.0.8:86/api/getTreatments").then(function(response) {
+            $http.get("http://localhost:86/api/getTreatments").then(function(response) {
                 $scope.treatments = response.data
             })
         }
 
         $scope.getCategories = function() {
-            $http.get("http://192.168.0.8:86/api/getTreatmentCats").then(function(response) {
+            $http.get("http://localhost:86/api/getTreatmentCats").then(function(response) {
                 $scope.categories = response.data
             })
         }
@@ -28,7 +28,7 @@ angular.module('beautyatevesApp')
         $scope.getCategories()
 
         $scope.getAvailability = function(id) {
-            $http.get("http://192.168.0.8:86/api/getAvailability?skillID=" + id).then(function(response) {
+            $http.get("http://localhost:86/api/getAvailability?skillID=" + id).then(function(response) {
                 $scope.availability = response.data
             })
         }
