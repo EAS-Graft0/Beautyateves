@@ -1,0 +1,14 @@
+{
+    "name": "webapp-angular-template"
+    , "version": "0.0.0"
+    , "authors": "GOTO10"
+    , "private": true
+    , "dependencies": {
+        "angular": "^1.4.5"
+        , "angular-ui-router": "^0.2.11"
+        , "angular-route": "^1.4.0"
+    }
+    , "devDependencies": {
+        
+    }
+}

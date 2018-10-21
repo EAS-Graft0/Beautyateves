@@ -1,0 +1,27 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <span style="color:white;font-size: 2em" class="icon ion-arrow-left-a" ng-click="modals.deliverySelectionModal.remove()"></span>
+    <h2 style="text-align: center; color:white" class="title">Delivery Selection</h2>
+  </ion-header-bar>
+  <ion-content padding="true" class="has-header" style="background-image: url('img/background.jpg'); background-size: cover;">
+    <ion-scroll zooming="true" direction="y" style="height: 100vh;">
+      <div ng-repeat="day in data.mealPlan.days" style="color:white;margin-left:5vw;margin-right:5vw;">
+        <h5 style="text-align:center;color:white;background-color:#6acbc8;padding-bottom: 1vh;padding-top: 1vh;margin-bottom: 0px;">Day {{$index+1}}</h5>
+        <div style="background-color: #00000038">
+          <span style="color:white;font-weight:bold;">Meals:</span>
+          <br>
+          <span style="color:white;margin-left: 4vw;" ng-repeat="meal in day.meals" ng-if="meal.type=='meals'">{{meal.name}}<br></span>
+          <span style="color:white;font-weight:bold;" ng-if="data.plans[data.planId].snack_count>0">Snacks:<br></span>
+          <span style="color:white;margin-left: 4vw;" ng-repeat="meal in day.meals" ng-if="meal.type=='snacks'">{{meal.name}}<br></span>
+          <span style="color:white;font-weight:bold;" ng-if="data.plans[data.planId].shake_count>0">Shakes:<br></span>
+          <span style="color:white;margin-left: 4vw;" ng-repeat="meal in day.meals" ng-if="meal.type=='shakes'">{{meal.name}}<br></span>
+          <br>
+        </div>
+      </div>
+    </ion-scroll>
+    <div style="z-index: 1000;position: absolute;bottom: 65px;height: 50px;margin-bottom:  0;">
+      <h3 style="text-align: center;background-color: #000000b8;margin-bottom: 0px;color:white;font-weight:bolder;">Package Price: £{{data.plans[data.planId].price+data.mealPlan.extraCost}}</h3>
+      <button ng-click="showDelivery()" class="button button-energized" style="background-color: #6acbc8;width:100vw;color: black;font-weight:  bolder;">CONTINUE</button>
+    </div>
+  </ion-content>
+</ion-modal-view>

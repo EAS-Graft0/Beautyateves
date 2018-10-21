@@ -1,0 +1,7 @@
+<div class="backdrop-main"></div>
+<div class="login-modal">
+    <h3>Please Login</h3>
+    <input type="text" placeholder="Email or Username" ng-model="email">
+    <input type="password" placeholder="Password" ng-model="password" ng-keydown="login($event, email, password)">
+    <button class="login-btn-main" ng-click="login($event, email, password)">Log In</button>
+</div>

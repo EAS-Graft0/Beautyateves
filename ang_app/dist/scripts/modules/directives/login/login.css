@@ -1,0 +1,68 @@
+/*.backdrop-main {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ecf0f19c;
+    z-index: 100;
+}
+
+.login-modal a {
+    color: #f19a4a;
+}
+
+.login-modal {
+    position: absolute;
+    background: #ffffff;
+    color: black;
+    z-index: 101;
+    left: calc(50% - 125px);
+    top: 50%;
+    padding: 30px 40px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 80px -5px #000000bd;
+}
+
+.login-modal>h3,
+.signup-modal>h3 {
+    padding: 40px 0px 40px 0px;
+    margin: -30px -40px 30px -40px;
+    font-size: 25px;
+    text-align: center;
+    color: #ffffff;
+    background: #67c9c9;
+}
+
+.login-modal>input,
+.signup-modal>input {
+    display: block;
+    background: none;
+    width: 300px;
+    border: 1px solid #717171;
+    color: #717171;
+    padding: 4px 9px;
+    font-size: 14px;
+    margin: 15px 0px;
+}
+
+.login-modal>input::placeholder {
+    color: #717171;
+    font-style: italic;
+}
+
+.login-modal>input:focus {
+    outline: none;
+}
+
+.login-modal>.login-btn-main,
+.signup-modal>.login-btn-main {
+    display: block;
+    text-align: center;
+    padding: 6px 0px;
+    border: none;
+    margin-top: 20px;
+    background: #67c9c9;
+    width: 100%;
+    color: white;
+}*/

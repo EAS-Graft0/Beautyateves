@@ -1,0 +1,22 @@
+<ion-view title="contact">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header" style="background-color:white; opacity:0.9;background-image: url('img/background.jpg'); background-size: cover;">
+    <h5 style="text-align:center;color:white;background-color:#6acbc8;padding-bottom: 1vh;padding-top: 1vh;margin-bottom: 30px;">Contact Us</h5>
+    <div class="list">
+      <label class="item item-input">
+        <input type="text" placeholder="Name" ng-model="name">
+      </label>
+      <label class="item item-input">
+        <input type="text" placeholder="Email" ng-model="email">
+      </label>
+      <label class="item item-input">
+        <textarea placeholder="Message" ng-model="message"></textarea>
+      </label>
+      <button style="background-color:#6acbc8;color:white;" class="button button-block" ng-click="sendMessage(name, email, message)"> Send </button>
+      <small ng-bind="messageResponse"></small>
+    </div>
+  </ion-content>
+</ion-view>
+

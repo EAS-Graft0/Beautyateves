@@ -1,0 +1,45 @@
+<ion-modal-view>
+    <ion-header-bar> <span style="font-size: 2em" class="icon ion-arrow-left-a" ng-click="modals.contactModal.remove()"></span>
+        <h1 class="title" style="text-align:center; font-size:1.5rem;">Contact</h1> </ion-header-bar>
+    <ion-content padding="true" class="has-header" >
+      <ion-scroll zooming="true" direction="y" style= "height: 800px">
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label" style="font-weight:bold;">First Name</span>
+                <input type="text" placeholder="John">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label" style="font-weight:bold;">Email</span>
+                <input type="text" placeholder="john@suhr.com">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label" style="font-weight:bold;">Message</span>
+                <input type="text" placeholder="How can we help?">
+            </label>
+        </div>
+        <ul class="list">
+
+        <li class="item item-toggle" style="font-weight:bold;">
+            Agree to terms and conditions?
+            <label class="toggle toggle-assertive">
+                <input type="checkbox">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </li>
+        </ul>
+        <button class="button button-full " style="background-color:#ffd3c8;">
+    Submit
+  </button>
+      </ionic-scroll>
+    </ion-content>
+    <div class="bar bar-footer bar-dark">
+      <a href="https://www.facebook.com/purokitchen" target="_blank"><i class="icon ion-social-facebook-outline puro-social-icon social-first" ></i></a>
+      <a href="https://www.instagram.com/purokitchen/" target="_blank"><i class="icon ion-social-instagram-outline puro-social-icon"></i></a>
+      <a href="https://www.instagram.com/purokitchen/" target="_blank"><i class="icon ion-social-snapchat-outline puro-social-icon"></i></a>
+      <a href="mailto:Info@Purokitchen.co.uk" target="_blank"><i class="icon ion-ios-email-outline puro-social-icon"></i></a>
+      <i class="icon ion-ios-telephone-outline puro-social-icon" ng-click="showPopup()"></i>
+    </div>
+
+</ion-modal-view>

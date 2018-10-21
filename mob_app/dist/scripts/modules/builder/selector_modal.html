@@ -1,0 +1,35 @@
+<ion-modal-view>
+    <ion-nav-title> <a ui-sref="home" > <img src="img/header.png"  style="height: 22px;
+        margin-top: 10px;"></a> </ion-nav-title>
+    <ion-nav-buttons side="left" style="background-color:#ffd3c8;">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right" style="background-color:#ffd3c8;">
+        <button class="button button-icon icon ion-bag"></button>
+    </ion-nav-buttons>
+    <ion-header-bar> <span style="font-size: 2em" class="icon ion-arrow-left-a" ng-click="modals.builderModal.remove()"></span>
+        <h1 class="title">Meal Plan Builder</h1> </ion-header-bar>
+    <ion-content>
+      <ion-scroll zooming="true" direction="y" style= "height: 800px">
+          <div class="row">
+              <button class="col" ng-click="selectionList='meals'">Meals</button>
+              <button class="col" ng-click="selectionList='shakes'">Shakes</button>
+          </div>
+          <swiper>
+              <slides>
+                  <slide ng-repeat="meal in data.meals">
+                      <div style="height:80vh;"><img src="{{meal.img}}">{{meal.name}}
+                          <br>{{meal.k}}
+                          <br>{{meal.p}}
+                          <br>{{meal.c}}
+                          <br>{{meal.f}}
+                          <br> </div>
+                      <div class="row">
+                          <button ng-click="addToPlan()">Add to Plan</button>
+                      </div>
+                  </slide>
+              </slides>
+          </swiper>
+        </ionic-scroll>
+    </ion-content>
+</ion-modal-view>

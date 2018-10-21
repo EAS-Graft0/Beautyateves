@@ -1,0 +1,36 @@
+<div ng-controller="checkoutCtrl">
+  <ion-modal-view>
+    <ion-header-bar>
+      <span style="color:white;font-size: 2em" class="icon ion-arrow-left-a" ng-click="modals.receiptModal.remove()"></span>
+      <h2 style="text-align: center; color:white" class="title">Receipt</h2>
+    </ion-header-bar>
+    <ion-content padding="true" class="has-header" style="background-image: url('img/background.jpg'); background-size: cover;">
+      <ion-scroll zooming="true" direction="y" style="height: 100vh;">
+        <ion-list>
+          <div class="row">
+            <div class="col">
+              <div style="background-image: url('img/logo.png'); width: 150px; height: 150px; background-size: contain; background-repeat: no-repeat;"> </div>
+            </div>
+            <div style="background: #68c9c9; width: 40%; padding: 10px; height: 40%; margin-top: 20px; margin-right: 22px; border-radius: 50%; position: relative;">
+              <h3 style="color: white;">Order Successful. Thank You. </h3>
+              <div style="color: white;" ng-bind="data.customer.name"> </div>
+              <div style="color: white;" ng-bind="'£' + data.totalPayment"></div>
+            </div>
+          </div>
+        </ion-list>
+        <!-- <div class="bar bar-header bar-balanced">
+        </div> -->
+        <div style="color: white;">
+          <div class="text-center" style="background: #68c9c9; padding: 15px;">
+            <div style="color: white;">You have ordered {{data.plans[data.mealPlan.planIndex].name}}</div>
+            <div style="color: white;">This will include {{data.plans[data.mealPlan.planIndex].meal_count}} meals, {{data.plans[data.mealPlan.planIndex].shake_count}} shakes and {{data.plans[data.mealPlan.planIndex].snack_count}} snacks</div>
+            <div style="color: white" ng-if="data.deliveries">You have chosen {{data.deliveries}} deliveries per week. </div>
+            <div style="color: white" ng-if="!data.deliveries"> You have chosen to collect from {{data.address}} </div>
+            <div style="color: white;">You will get your order on {{data.date | date:'fullDate'}}</div>
+          </div>
+        </div>
+        <button ui-sref="home" class="button-block" style="font-weight:bold;color: white;margin-top:20px;background: #68c9c9; padding: 15px;">Puro Home</button>
+      </ion-scroll>
+    </ion-content>
+  </ion-modal-view>
+</div>

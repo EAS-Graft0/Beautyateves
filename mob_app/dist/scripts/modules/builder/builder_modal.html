@@ -1,0 +1,68 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <span style="color:white;font-size: 2em" class="icon ion-arrow-left-a" ng-click="modals.builderModal.remove()"></span>
+        <h2 style="text-align: center; color:white" class="title">Meal Plan Builder</h2>
+    </ion-header-bar>
+    <ion-content padding="true" class="has-header" style="background-image: url('img/background.jpg'); background-size: cover;">
+        <swiper style="height:100vh;">
+            <slides>
+                <slide ng-repeat="day in data.mealPlan.days" style="height:100vh;display:inline-block;background-color: #fffefe6e; color:#fffefe6e; background-size: cover;">
+                    <span style="
+    display: block;
+    margin-top: 20px;
+    font-size: 35px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0px 0px 10px #00000091;"> DAY {{$index+1}} </span>
+                    <ion-scroll zooming="true" direction="y" style="height: 80vh;top: 40px;">
+                        <div class="slot-scroller">
+                            <div style="display:block;" ng-repeat="slot in day.meals">
+                                <!-- <h3 class="plan-day-item-text" style="margin-bottom: 0px;">{{slot.type}} {{$index+1}}</h3> -->
+                                <swiper class="puro-slot" on-transition-start="onTransitionStart" id="{{$index}}">
+                                    <slides>
+                                        <slide style="background-image: url({{meal.img}});background-size: cover;" ng-repeat="meal in data[slot.type]" ng-if="slot.details == false" ng-click="slot.details = !slot.details">
+                                            <h4 style="    position: absolute;
+    margin-top: 0px;
+    top: 0px;
+    background-color: #ffffff8c;
+    width: 100%;
+    color: black;">{{meal.name.toUpperCase()}}</h4>
+                                            <h3 style="position: absolute;top: 75%;margin-top: 0px;left:75%;background-color: #6acbc8;width: 25vw;color: white;" ng-if="meal.premium_price > 0">+£{{meal.premium_price.toFixed(2)}}</h3>
+                                            <h5 style="    width: 100vw;
+    background-color: #ffffffbf;
+    position: absolute;
+    bottom: -10px;
+    color: black;
+    left: 0vw;">kCal: {{meal.nutrition.kCal.toFixed(2)}}  Carbs: {{meal.nutrition.Carbohydrates.toFixed(2)}}  Protein: {{meal.nutrition.Protein.toFixed(2)}}  Fats: {{meal.nutrition.Fats.toFixed(2)}}</h5>
+                                        </slide>
+                                        <slide style="background-color: #333131d9;display:inline-block;" ng-repeat="meal in data[slot.type]" ng-if="slot.details == true" ng-click="slot.details = !slot.details">
+                                            <h2 style="color: white;">PURO</h2>
+                                            <h5 style="margin-top: -15px;color: white;">F I T F O O D</h5>
+                                            <h5 style="font-family: 'Raleway', sans-serif; text-align:center;  background-color: #ffd3c8;border: 2px solid white; margin-right: 20vw;margin-left: 20vw;margin-top:-8px;">{{meal.name}}</h5>
+                                            <hr>
+                                            <div class="row" style="margin-top: -10px;">
+                                                <div class="col">
+                                                    <h5 style="margin-top: -22px;;margin-bottom: 0px;color: white;">Nutrition</h5>
+                                                    <h5 ng-repeat="(key,value) in meal.nutrition" style="font-size:10px;color:white;margin-bottom: 0px;margin-top: 0px;line-height: 1.0;">{{key}}: {{value.toFixed(2)}}</h5>
+                                                </div>
+                                                <div class="col">
+                                                    <h5 style="margin-top: -22px;margin-bottom: 0px;color: white;">Ingredients</h5>
+                                                    <h5 ng-repeat="ingredient in meal.ingredients" style="font-size:10px;color:white;margin-bottom: 0px;margin-top: 0px;line-height: 1.0;">{{ingredient.name}}</h5>
+                                                </div>
+                                            </div>
+                                        </slide>
+                                    </slides>
+                                </swiper>
+                            </div>
+                        </div>
+                    </ion-scroll>
+                </slide>
+            </slides>
+            <prev></prev>
+            <next></next>
+        </swiper>
+        <div style="z-index: 1000;position: absolute;bottom:40px;height: 50px;margin-bottom:  0;">
+            <button ng-click="showSummary()" class="button button-energized" style="background-color: #6acbc8;width:100vw;color: black;font-weight:  bolder;">Next</button>
+        </div>
+    </ion-content>
+</ion-modal-view>

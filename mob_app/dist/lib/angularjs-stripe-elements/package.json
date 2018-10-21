@@ -1,0 +1,60 @@
+{
+  "_from": "angularjs-stripe-elements",
+  "_id": "angularjs-stripe-elements@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha1-MmYzoK7qD0VydB6MzMHfbywua8Q=",
+  "_location": "/angularjs-stripe-elements",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "angularjs-stripe-elements",
+    "name": "angularjs-stripe-elements",
+    "escapedName": "angularjs-stripe-elements",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angularjs-stripe-elements/-/angularjs-stripe-elements-1.0.0.tgz",
+  "_shasum": "326633a0aeea0f4572741e8cccc1df6f2c2e6bc4",
+  "_spec": "angularjs-stripe-elements",
+  "_where": "/test",
+  "author": {
+    "name": "kareniel"
+  },
+  "bugs": {
+    "url": "https://github.com/kareniel/angularjs-stripe-elements/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "angularjs wrapper around stripe elements",
+  "devDependencies": {
+    "standard": "^10.0.3"
+  },
+  "homepage": "https://github.com/kareniel/angularjs-stripe-elements#readme",
+  "keywords": [
+    "angularjs",
+    "angular.js",
+    "stripe.js",
+    "stripe",
+    "elements"
+  ],
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "name": "angularjs-stripe-elements",
+  "peerDependencies": {
+    "angular": ">= 1.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kareniel/angularjs-stripe-elements.git"
+  },
+  "scripts": {
+    "test": "standard --fix"
+  },
+  "version": "1.0.0"
+}

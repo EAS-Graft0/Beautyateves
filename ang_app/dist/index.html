@@ -1,0 +1,72 @@
+<html class="no-js">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body ng-app="webApp" class="bg-body">
+    <!-- Framebusting logic. See: http://seclab.stanford.edu/websec/framebusting/framebust.pdf -->
+    <style>
+    body {
+        display: none;
+    }
+    </style>
+    <script>
+    if (self == top) {
+        document.getElementsByTagName("body")[0].style.display = 'block';
+    } else {
+        top.location = self.location;
+    }
+    </script>
+    <script>
+    /**
+     * Rewrite base.href to be an absolute URL. Only necessary for IE 9, but works fine in other browsers.
+     */
+    function toAbsURL(s) {
+        var l = location,
+            h, p, f, i;
+        if (/^\w+:/.test(s)) {
+            return s;
+        }
+        h = l.protocol + '//' + l.host + (l.port != '' ? (':' + l.port) : '');
+        if (s.indexOf('/') == 0) {
+            return h + s;
+        }
+        p = l.pathname.replace(/\/[^\/]*$/, '');
+        f = s.match(/\.\.\//g);
+        if (f) {
+            s = s.substring(f.length * 3);
+            for (i = f.length;;) {
+                i = p = p.substring(0, p.lastIndexOf('/'));
+            }
+        }
+        return h + p + '/' + s;
+    }
+    var base = document.getElementsByTagName('base')[0];
+    base.href = toAbsURL(base.href);
+    </script>
+    <div ng-view="" class="full-height"></div>
+    <login ng-if="$root.login"></login>
+    <!-- inject:js -->
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <!-- endinject -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/scripts.js"></script>
+    <script src="scripts/templates.js"></script>
+    <!-- bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

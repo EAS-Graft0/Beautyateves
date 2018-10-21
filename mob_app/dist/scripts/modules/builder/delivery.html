@@ -1,0 +1,89 @@
+<div>
+  <ion-modal-view>
+    <ion-header-bar>
+      <span style="color:white;font-size: 2em" class="icon ion-arrow-left-a" ng-click="modals.deliveryModal.remove()"></span>
+      <h2 style="text-align: center; color:white" class="title">Delivery</h2>
+    </ion-header-bar>
+    <ion-content padding="true" class="has-header" style="background-image: url('img/background.jpg'); background-size: cover;">
+      <ion-scroll zooming="true" direction="y" style="height: 100vh;">
+        <div style="background: white; height: 100%;" class="form-group" ng-form name="myForm">
+          <ion-list>
+            <ion-radio ng-model="data.deliveryType" ng-value="'delivery'" ng-click="data.address=''">Delivery</ion-radio>
+            <!-- Maybe hide after selected? -->
+            <ion-radio ng-model="data.deliveryType" ng-value="'collection'">Collection</ion-radio>
+          </ion-list>
+          <ion-list ng-if="data.deliveryType=='collection'">
+            <ion-radio ng-model="data.address" ng-value="'newport'">Newport</ion-radio>
+            <ion-radio ng-model="data.address" ng-value="'cardiff'">Cardiff</ion-radio>
+          </ion-list>
+          <div class="list" ng-if="data.deliveryType">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">First Name</span>
+              <input type="text" placeholder="John" ng-model="data.customer.name" name="name" required>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Last Name</span>
+              <input type="text" placeholder="Surname" ng-model="data.customer.surname" name="surname" required>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Email</span>
+              <span ng-bind="form"></span>
+              <input placeholder="name@doman.com" ng-model="data.customer.email" name="email" type="email" required>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Phone</span>
+              <input type="number" placeholder="07295825965" ng-model="data.customer.contact" name="contact" ng-minlength="10" required>
+            </label>
+            <div class="list" ng-if="data.deliveryType=='delivery'">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">First Line</span>
+                <input type="text" placeholder="First Line" ng-model="data.address.first_line">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Second Line</span>
+                <input type="text" placeholder="Second Line" ng-model="data.address.second_line">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Town</span>
+                <input type="text" placeholder="town" ng-model="data.address.town">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">County</span>
+                <input type="text" placeholder="County" ng-model="data.address.county">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Post Code</span>
+                <input type="text" placeholder="Post Code" ng-model="data.address.postCode">
+              </label>
+              <button ng-if="data.address.postCode" ng-click="checkLocation()" class="button button-full button-calm">Check Postcode</button>
+            </div>
+            <div ng-if="data.deliveryType=='delivery'">
+              <small>*Delivery will be £{{data.deliveryCharge}} per delivery*</small>
+              <label class="item item-input item-select" ng-if="data.deliveryCharge">
+                <div class="input-label">
+                  Deliveries per week
+                </div>
+                <select ng-model="data.deliveries">
+                  <option selected ng-value="1">1</option>
+                  <option ng-value="2">2</option>
+                </select>
+              </label>
+            </div>
+            <label class="item item-input item-select" ng-if="data.address">
+              <div class="input-label">
+                Date
+              </div>
+              <select ng-model="data.date">
+                <option selected ng-value="dates[0]">{{dates[0] | date:'fullDate'}}</option>
+                <option ng-value="dates[1]">{{dates[1] | date:'fullDate'}}</option>
+                <option ng-value="dates[2]">{{dates[2] | date:'fullDate'}}</option>
+              </select>
+            </label>
+          </div>
+          <button ng-if="data.date && myForm.email.$valid && myForm.name.$valid && myForm.surname.$valid && myForm.contact.$valid" ng-click="showCheckout(data)" class="button button-full button-calm">Continue</button>
+        </div>
+          <!-- <div class="form-group" ng-form name="myForm"> -->
+    <!-- <input name="myInput" type="text" class="form-control" ng-model="bindTo" ng-maxlength="5"> -->
+    <!-- <span class="error" ng-show="myForm.myInput.$error.maxlength">Too long!</span> -->
+<!-- </div> -->
+</div>

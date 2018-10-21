@@ -1,0 +1,27 @@
+{
+  "name": "gulp-dev-dependencies",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {},
+  "author": "GOTO10",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-concat": "^2.4.3",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-inject": "^4.3.0",
+    "gulp-jasmine": "^2.4.2",
+    "gulp-mocha": "^4.3.1",
+    "gulp-protractor": "^4.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-template": "^4.0.0",
+    "gulp-watch": "^4.3.11",
+    "should": "^13.2.1"
+  },
+  "devDependencies": {}
+}

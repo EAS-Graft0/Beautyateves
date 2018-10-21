@@ -1,0 +1,33 @@
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 15px;
+}
+
+/* CSS for view checkout  Start all of your class names for this view with checkout*/
+/* CSS for view bodyProfile  Start all of your class names for this view with bodyProfile*/
+/* CSS for view contact  Start all of your class names for this view with contact*/
+/* CSS for view menu  Start all of your class names for this view with menu*/
+/* CSS for view customGuide  Start all of your class names for this view with customGuide*/
+/* CSS for view plans  Start all of your class names for this view with plans*/
+
+.puro-slot {
+  font-family: 'Raleway', sans-serif !important;
+  height: 25vh !important;
+  width: 90vw !important;
+  display: inline-block !important;
+  margin-left: 3vw !important;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.4) !important;
+  text-align: center !important;
+  border-radius: 10px !important;
+  cursor: pointer !important;
+}
+
+.day-slide {
+  height: 90vh;
+  width: 100vw;
+}
+
+.slot-scroller {
+  margin-top: 40px;
+}

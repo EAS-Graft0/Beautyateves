@@ -1,0 +1,34 @@
+<ion-modal-view>
+<ion-header-bar> <span style="font-size: 2em" class="icon ion-arrow-left-a" ng-click="modals.customizerModal.remove()"></span>
+    <h1 class="title">Meal Customizer</h1> </ion-header-bar>
+<ion-content padding="true" class="has-header">
+  <ion-scroll zooming="true" direction="y" style= "height: 800px">
+    <br>
+    <p>Price = {{ price | currency : "GBP" : 3}}</p>
+    <ul class="list">
+        <div>
+            <li class="item">
+                Chicken
+            </li>
+            <input ng-model="data.currentMeal.chicken" type="number" placeholder="multiple of 25g" step="25">
+        </div>
+         <br>
+        <div>
+            <li class="item">
+                Rice
+            </li>
+            <input type="number" placeholder="multiple of 25g" step="25">
+        </div>
+         <br>
+        <div>
+            <li class="item">
+                Vegetables
+            </li>
+            <input type="number" placeholder="multiple of 25g" step="25">
+        </div>
+    </ul>
+    <button class="button button-balanced" style="background-color:#ffd3c8; color:black" ng-click="showCustomizer()">Clone</button>
+    <button class="button button-balanced" style="background-color:#ffd3c8; color:black" ng-click="showCustomizer()">Done</button>
+  </ionic-scroll>
+</ion-content>
+</ion-modal-view>

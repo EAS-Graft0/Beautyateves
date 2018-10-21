@@ -1,0 +1,27 @@
+<ion-side-menus>
+    <ion-pane ion-side-menu-content>
+        <ion-nav-bar class="bar-stable">
+            <ion-nav-back-button class="button-clear"><i class="icon ion-chevron-left"></i> Back</ion-nav-back-button>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    </ion-pane>
+    <ion-side-menu side="left">
+        <ion-content>
+            <ion-list>
+                <div class="heading-item  item-complex menu-text" nav-clear="" menu-close=""> <img src="img/logo.png" style="
+    height: 180px;
+    display: -webkit-box;
+    margin: 0 auto;
+    padding: 15px;"> </div>
+                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.home"> <i class="icon ion-home"></i>
+                    <h2 class="menu-text">Home</h2> </ion-item>
+                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.plans"> <i class="icon ion-ios-cart"></i>
+                    <h2 class="menu-text">Order</h2> </ion-item>
+                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.menu"> <i class="icon ion-ios-book"></i>
+                    <h2 class="menu-text">Menu</h2> </ion-item>
+                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.contact" > <i class="icon ion-android-call"></i>
+                    <h2 class="menu-text">Contact Us</h2> </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

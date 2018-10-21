@@ -1,0 +1,63 @@
+<style type="text/css" media="screen">
+.prices {
+  text-align: center;
+  background-color: #000000b8;
+  margin-bottom: 0px;
+  font-weight: bolder;
+  color: white;
+}
+
+.packageText {
+  text-align: center;
+  background-color: #000000b8;
+  margin-bottom: 0px;
+  color: white;
+  font-weight: bolder;
+}
+
+</style>
+<ion-modal-view>
+  <ion-header-bar>
+    <span style="color:white;font-size: 2em" class="icon ion-arrow-left-a" ng-click="modals.builderSummaryModal.remove()"></span>
+    <h2 style="text-align: center; color:white" class="title">Builder Summary</h2>
+  </ion-header-bar>
+  <ion-content padding="true" class="has-header" style="background-image: url('img/background.jpg'); background-size: cover;">
+    <ion-scroll zooming="true" direction="y" style="height: 100vh;">
+      <div ng-repeat="day in data.mealPlan.days" style="color:white;margin-left:5vw;margin-right:5vw;">
+        <h5 style="text-align:center;color:white;background-color:#6acbc8;padding-bottom: 1vh;padding-top: 1vh;margin-bottom: 0px;">Day {{$index+1}}</h5>
+        <div style="background-color: #00000038">
+          <span style="color:white;font-weight:bold;">Meals:</span>
+          <br>
+          <span style="color:white;margin-left: 4vw;" ng-repeat="meal in day.meals" ng-if="meal.type=='meals'">{{meal.name}}<span ng-if="meal.premium_price>0" style="color:white;margin-left: 4vw;font-weight:bold;">  +£{{meal.premium_price.toFixed(2)}}</span>
+          <br>
+          </span>
+          <span style="color:white;font-weight:bold;" ng-if="data.plans[data.planId].snack_count>0">Snacks:<br></span>
+          <span style="color:white;margin-left: 4vw;" ng-repeat="meal in day.meals" ng-if="meal.type=='snacks'">{{meal.name}}<span ng-if="meal.premium_price>0" style="color:white;margin-left: 4vw;font-weight:bold;">  +£{{meal.premium_price.toFixed(2)}}</span>
+          <br>
+          </span>
+          <span style="color:white;font-weight:bold;" ng-if="data.plans[data.planId].shake_count>0">Shakes:<br></span>
+          <span style="color:white;margin-left: 4vw;" ng-repeat="meal in day.meals" ng-if="meal.type=='shakes'">{{meal.name}}<span ng-if="meal.premium_price>0" style="color:white;margin-left: 4vw;font-weight:bold;">  +£{{meal.premium_price.toFixed(2)}}</span>
+          <br>
+          </span>
+          <br>
+        </div>
+      </div>
+    </ion-scroll>
+    <div style="z-index: 1000;position: absolute;bottom: 65px;height: 50px;margin-bottom:  0;">
+      <h3 class="packageText">Package Price</h3>
+      <div style="display: inline-flex; text-align: center;">
+        <button ng-click="showDelivery('week')" class="button button-calm" style="background-color: #6acbc8;width:50vw;color: black;font-weight:  bolder;">
+          <small>Weekly</small>
+          <span> £{{(data.plans[data.planIndex].week_price+data.mealPlan.extraCost)}}
+            </span>
+        </button>
+        <button ng-click="showDelivery('month')" class="button button-calm" style="background-color: #6acbc8;width:50vw;color: black;font-weight:  bolder;">
+          <small>Monthly</small>
+          <span> £{{(data.plans[data.planIndex].month_price+(data.mealPlan.extraCost*4))}}
+            </span>
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>
+<!-- : £{{(data.plans[data.planId].price+data.mealPlan.extraCost).toFixed(2)}} -->

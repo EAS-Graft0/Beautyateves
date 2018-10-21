@@ -1,0 +1,549 @@
+.side-nav {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  width: 250px;
+  overflow: hidden;
+  background: #80c7c8;
+  z-index: 1;
+}
+
+.side-nav.indexed {
+  z-index: 9;
+}
+
+.side-nav>.logo-container {
+  background: #44a3a5;
+  /* height: 70px; */
+  width: 250px;
+}
+
+.side-nav>.logo-container>img {
+  width: 190px;
+  padding: 10px;
+  margin-left: 25px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.menu-item-category>h6 {
+  color: #d0f0f1;
+  padding: 10px 30px;
+  margin-top: 30px;
+  font-size: 14px;
+  user-select: none;
+}
+
+.menu-item {
+  border-left: 8px solid #80c7c8;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: #549596;
+  border-left: 8px solid #539496;
+}
+
+.menu-item>svg {
+  color: #ecf0f1;
+  margin: 5px 10px;
+  font-size: 15px;
+}
+
+.menu-item>a {
+  color: #ffffff;
+  font-size: 15px;
+  display: inline-block;
+  padding-left: 3px;
+  position: relative;
+  top: -5px;
+}
+
+.side-nav a {
+  text-decoration: none !important;
+}
+
+.menu-item.active {
+  border-left: 8px solid #327879;
+  background: #ecf0f1;
+  background-image: linear-gradient(to right, #ecf0f1, #dbdfe0);
+}
+
+.menu-item.active>svg {
+  color: #327879;
+}
+
+.menu-item.active>a {
+  color: #2b2b2b;
+}
+
+.menu-item.active>a:hover {
+  text-decoration: none;
+}
+
+.content {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 250px;
+  right: 0px;
+  padding: 20px;
+  overflow: scroll;
+}
+
+.m-modal {
+  position: fixed;
+  left: 250px;
+  bottom: 00px;
+  top: 0px;
+  right: 00px;
+  background: white;
+  z-index: 1;
+  /* box-shadow: 0px 0px 30px -10px black; */
+  border-top: 1px solid #dedede;
+}
+
+.m-modal>.p-content {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 50px;
+  padding: 20px;
+  right: 0px;
+  overflow: scroll;
+}
+
+.m-modal>.controlls {
+  position: absolute;
+  height: 50px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0px 20px;
+  padding: 7.5px 20px;
+  right: 0px;
+}
+
+.button {
+  background: white;
+  border: none;
+  padding: 5px 15px;
+  color: black;
+  cursor: pointer;
+}
+
+.button.button-danger {
+  background: #f16f6f;
+  color: white;
+}
+
+.button.button-std {
+  background: #909090;
+  color: white;
+}
+
+.ingredient-select {
+  display: inline-grid;
+  width: 150px;
+  height: 150px;
+  padding: 20px;
+  background: #ececec;
+  margin: 4px;
+  position: relative;
+  font-weight: 100;
+}
+
+.button.button-success {
+  background: #80c7c8;
+  color: white;
+}
+
+.meal {
+  width: 250px;
+  height: 150px;
+  display: inline-grid;
+  background: #ececec;
+  padding: 20px;
+  font-size: 25px;
+  font-weight: 200;
+  color: #292929;
+  cursor: pointer;
+  position: relative;
+  margin: 5px 10px;
+}
+
+.meal>p {
+  font-size: 15px;
+  color: #888888;
+  font-weight: 100;
+}
+
+.add-ingredient-button {
+  text-align: center;
+  font-size: 90px;
+  position: absolute;
+  left: 50%;
+  top: 53%;
+  color: #464646;
+  transform: translate(-50%, -50%);
+}
+
+.ingeredient-selector {
+  background: #fdfdfd;
+  z-index: 4;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow: scroll;
+}
+
+.remove-ingredient {
+  position: absolute;
+  top: 50%;
+  font-weight: bold;
+  right: -10px;
+  color: #f16f6f;
+  cursor: pointer;
+  font-size: 40px;
+  line-height: 12px;
+}
+
+.meal-container {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  overflow: scroll;
+  padding: 5px 0px;
+}
+
+.meal-container.collapsed {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 400px;
+  right: 0px;
+}
+
+.spinner {
+  display: inline-block;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner div {
+  display: inline-block;
+  position: absolute;
+  left: 6px;
+  width: 13px;
+  background: #80c7c8;
+  animation: spinner 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.spinner div:nth-child(1) {
+  left: 6px;
+  animation-delay: -0.24s;
+}
+
+.spinner div:nth-child(2) {
+  left: 26px;
+  animation-delay: -0.12s;
+}
+
+.spinner div:nth-child(3) {
+  left: 45px;
+  animation-delay: 0;
+}
+
+@keyframes spinner {
+  0% {
+    top: 6px;
+    height: 51px;
+  }
+
+  50%, 100% {
+    top: 19px;
+    height: 26px;
+  }
+}
+
+@media only screen and (max-width: 415px) {
+  .side-nav {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 65px;
+    overflow: hidden;
+    background: #80c7c8;
+    z-index: 1;
+  }
+
+  .menu-item-category>h6,
+  .side-nav a {
+    display: none;
+  }
+
+  .menu-item>svg {
+    font-size: 25px;
+    margin-left: 5px;
+  }
+
+  .content {
+    left: 65px;
+  }
+
+  .m-modal {
+    left: 0px;
+  }
+
+  .meal {
+    width: calc(100% - 20px);
+  }
+
+  .button.button-std {
+    background: #3c7b7b;
+    color: white;
+  }
+
+  .button.button-success {
+    background: #ffffff;
+    color: #3c8384;
+  }
+
+  .m-modal>.controlls {
+    background: #80c7c8;
+  }
+
+  .ingeredient-selector {
+    position: fixed;
+  }
+
+  .meal.ingr {
+    height: auto;
+  }
+
+  .menu-item:last-of-type {
+    bottom: 0px;
+    position: absolute;
+  }
+}
+.selector-container {
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 100px;
+  color: white;
+  background: #67c9c9;
+}
+
+.selector {
+  width: 30vw;
+  display: inline-block;
+  height: 100%;
+  line-height: 75px;
+  font-size: 35px;
+  border-bottom: 15px solid #35ccca;
+  cursor: pointer;
+}
+
+.selector.active {
+  background: #27a5a3;
+  border-bottom: 15px solid #2b8c8b;
+}
+
+.selector-view {
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.meal-cont {
+  color: black;
+  padding: 20px;
+}
+
+.meal-cont>h4 {
+  color: black;
+  font-size: 30px;
+  display: inline-block;
+}
+
+.meal-cont>h5 {
+  color: black;
+  /*margin-left: 20px;*/
+  display: inline-block;
+}
+
+.meal-cont>div {
+  color: black;
+  display: inline-block;
+  padding: 10px;
+  text-align: center;
+  background: #ececec;
+  margin: 5px 10px;
+}
+
+.meal-cont>div>h4 {
+  color: black;
+}
+
+.meal-cont>div>h5 {
+  color: black;
+}
+/* CSS for view voucher  Start all of your class names for this view with voucher*/
+.backdrop-main {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #cecece;
+  z-index: 100;
+}
+
+.login-modal a {
+  color: #f19a4a;
+}
+
+.login-modal {
+  position: absolute;
+  background: #ffffff;
+  color: black;
+  z-index: 101;
+  left: 50%;
+  top: 50%;
+  padding: 30px 40px;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 80px -5px #000000bd;
+}
+
+.login-modal>h3,
+.signup-modal>h3 {
+  padding: 40px 0px 40px 0px;
+  margin: -30px -40px 30px -40px;
+  font-size: 25px;
+  text-align: center;
+  color: #ffffff;
+  background: #67c9c9;
+}
+
+.login-modal>input,
+.signup-modal>input {
+  display: block;
+  background: none;
+  width: 300px;
+  border: 1px solid #717171;
+  color: #717171;
+  padding: 4px 9px;
+  font-size: 14px;
+  margin: 15px 0px;
+}
+
+.login-modal>input::placeholder {
+  color: #717171;
+  font-style: italic;
+}
+
+.login-modal>input:focus {
+  outline: none;
+}
+
+.login-modal>.login-btn-main,
+.signup-modal>.login-btn-main {
+  display: block;
+  text-align: center;
+  padding: 6px 0px;
+  border: none;
+  margin-top: 20px;
+  background: #67c9c9;
+  width: 100%;
+  color: white;
+}
+
+@media only screen and (max-width: 415px) {
+  .login-modal {
+    box-shadow: none;
+  }
+}
+/*.backdrop-main {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ecf0f19c;
+    z-index: 100;
+}
+
+.login-modal a {
+    color: #f19a4a;
+}
+
+.login-modal {
+    position: absolute;
+    background: #ffffff;
+    color: black;
+    z-index: 101;
+    left: calc(50% - 125px);
+    top: 50%;
+    padding: 30px 40px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 80px -5px #000000bd;
+}
+
+.login-modal>h3,
+.signup-modal>h3 {
+    padding: 40px 0px 40px 0px;
+    margin: -30px -40px 30px -40px;
+    font-size: 25px;
+    text-align: center;
+    color: #ffffff;
+    background: #67c9c9;
+}
+
+.login-modal>input,
+.signup-modal>input {
+    display: block;
+    background: none;
+    width: 300px;
+    border: 1px solid #717171;
+    color: #717171;
+    padding: 4px 9px;
+    font-size: 14px;
+    margin: 15px 0px;
+}
+
+.login-modal>input::placeholder {
+    color: #717171;
+    font-style: italic;
+}
+
+.login-modal>input:focus {
+    outline: none;
+}
+
+.login-modal>.login-btn-main,
+.signup-modal>.login-btn-main {
+    display: block;
+    text-align: center;
+    padding: 6px 0px;
+    border: none;
+    margin-top: 20px;
+    background: #67c9c9;
+    width: 100%;
+    color: white;
+}*/

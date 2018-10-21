@@ -1,0 +1,52 @@
+
+<ion-modal-view>
+  <ion-header-bar> <span style="font-size: 2em" class="icon ion-arrow-left-a" ng-click="modals.builderModal.remove()"></span>
+      <h1 class="title">Tell us what you want</h1> </ion-header-bar>
+<ion-content padding="true" class="has-header" style="background-image: url('img/background.jpg'); background-size: cover;">
+  <ion-scroll zooming="true" direction="y" style="height: 650px">
+  <div class="list" style="background-color:#2E86AB; opacity:0.8;">
+      <h3 style="text-align:center; color: white;">Allergies</h3>
+        <div ng-repeat="allergy in data.allergies">
+          <div class="row" ng-if="$index % 2 == 0">
+            <ion-checkbox class="col" name="allergy" ng-click="allergySelected(data.allergies[$index].id)" >{{data.allergies[$index].name}}</ion-checkbox>
+            <ion-checkbox class="col" name="allergy" ng-click="allergySelected(data.allergies[$index+1].id)" style="text-align: center;" ng-if="data.allergies[$index+1]">{{data.allergies[$index+1].name}}</ion-checkbox>
+          </div>
+        </div>
+
+
+
+
+
+      <h3 style="text-align:center; color: white;">Ingredient</h3>
+          <div ng-repeat="ingredient in data.ingredients track by $index"  >
+            <div class="row" ng-if="$index % 2 == 0">
+              <ion-checkbox  name="ingredient" ng-click="ingredientSelected(data.ingredients[$index].id)" class="col"  ng-show="data.ingredients[$index].visable == true">{{data.ingredients[$index].name}}</ion-checkbox>
+              <ion-checkbox  name="ingredient" ng-click="ingredientSelected(data.ingredients[$index+1].id)" class="col" ng-show="data.ingredients[$index+1].visable == true" ng-if="data.ingredients[$index+1]">{{data.ingredients[$index+1].name}}</ion-checkbox>
+            </div>
+          </div>
+
+
+
+
+
+      <h3 style="text-align:center; color: white;">Flavour Preferences</h3>
+        <div ng-repeat="shake in data.shakes">
+          <div class="row" ng-if="$index % 2 == 0">
+            <ion-checkbox class="col" >{{data.shakes[$index].name}}</ion-checkbox>
+            <!-- <ion-checkbox class="col" style="text-align: center;  ng-if="data.shakes[$index+1]">{{data.shakes[$index+1].name}}</ion-checkbox> -->
+          </div>
+        </div>
+      </div>
+      <button class="button button-balanced" style="background-color:#ffd3c8; color:black; width:100%; border-radius: 8px; margin-top:10px;" ng-click="showMacros();">Submit</button>
+
+
+  </ion-scroll>
+</ion-content>
+<div class="bar bar-footer bar-dark">
+  <a href="https://www.facebook.com/purokitchen" target="_blank"><i class="icon ion-social-facebook-outline puro-social-icon social-first" ></i></a>
+  <a href="https://www.instagram.com/purokitchen/" target="_blank"><i class="icon ion-social-instagram-outline puro-social-icon"></i></a>
+  <a href="https://www.instagram.com/purokitchen/" target="_blank"><i class="icon ion-social-snapchat-outline puro-social-icon"></i></a>
+  <a href="mailto:Info@Purokitchen.co.uk" target="_blank"><i class="icon ion-ios-email-outline puro-social-icon"></i></a>
+  <i class="icon ion-ios-telephone-outline puro-social-icon" ng-click="showPopup()"></i>
+</div>
+</ion-modal-view>

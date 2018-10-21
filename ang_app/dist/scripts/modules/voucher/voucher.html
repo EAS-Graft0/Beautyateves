@@ -1,0 +1,41 @@
+<div class="content">
+    <div class="meal-container" ng-class="{'collapsed':activeModal.type == 'edit_plan'}">
+        <div ng-repeat="plan in plans track by $index" ng-click="editPlan(plan)" class="meal">{{plan.name}}
+            <br>
+            <p>{{plan.description}}</p>
+        </div>
+        <div class="meal" style="cursor: pointer; text-align: center;" ng-click="addPlan()">
+            <h5 class="add-ingredient-button">+</h5> Add Plan
+        </div>
+    </div>
+    <div class="m-modal" ng-if="activeModal.type == 'edit_plan'">
+        <div class="p-content">
+            <input type="text" ng-model="activeModal.data.name" style="font-size: 30px;">
+            <textarea ng-model="activeModal.data.description" style="margin-bottom: 20px;width: 100%;border: 1px solid #dadada;margin-top: 5px;height: 60px;"> </textarea>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="number" ng-model="activeModal.data.meal_count">
+                    <label for=""> Meals</label>
+                    <br>
+                    <input type="number" ng-model="activeModal.data.shake_count">
+                    <label for=""> Shakes</label>
+                    <br>
+                    <input type="number" ng-model="activeModal.data.snack_count">
+                    <label for=""> Snacks</label>
+                    <br>
+                    <input type="number" ng-model="activeModal.data.week_price">
+                    <label for=""> Weekly Price (£.pp)</label>
+                    <br>
+                    <input type="number" ng-model="activeModal.data.month_price">
+                    <label for=""> Monthly Price (£.pp)</label>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="controlls" style="text-align: right;">
+            <button class="button button-danger" style="float: left;" ng-if="activeModal.data.id" ng-click="deletePlan(activeModal.data)">Delete</button>
+            <button class="button button-std" ng-click="closeModal()">Go Back</button>
+            <button class="button button-success" ng-click="savePlan(activeModal.data)">Apply Changes</button>
+        </div>
+    </div>
+</div>

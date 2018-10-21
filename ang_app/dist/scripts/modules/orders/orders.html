@@ -1,0 +1,77 @@
+<div class="selector-container">
+  <div class="selector" ng-class="{'active': activeView == 'pre'}" ng-click="setActive('pre')">
+    Preparation
+  </div>
+  <div class="selector" ng-class="{'active': activeView == 'coo'}" ng-click="setActive('coo')">
+    Cooking
+  </div>
+  <div class="selector" ng-class="{'active': activeView == 'pac'}" ng-click="setActive('pac')">
+    Packaging
+  </div>
+</div>
+<div class="selector-view" ng-show="activeView == 'pre'">
+  <div>
+    <div class="datePickerDiv">
+      <input type="date" ng-model="fromDate">
+      <br>
+      <input type="date" ng-model="toDate">
+      <br>
+      <button ng-click="filterDates()">Get Orders</button>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <th>Ingredient</th>
+      <th>Amount</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="ingredient in data.orderData.ingredients">
+        <td ng-bind="ingredient.name"></td>
+        <td ng-bind="ingredient.amount"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="selector-view" ng-show="activeView == 'coo'">
+  <div>
+    <div class="datePickerDiv">
+      <input type="date" ng-model="fromDate">
+      <br>
+      <input type="date" ng-model="toDate">
+      <br>
+      <button ng-click="filterDates()">Get Orders</button>
+    </div>
+  </div>
+  <div ng-repeat="meal in data.orderData.items.meals" class="meal-cont">
+    <h4 ng-bind="meal.name"></h4> x
+    <h5 ng-bind="meal.count"></h5>
+    <br>
+    <div ng-repeat="ing in meal.ingredients">
+      <h5 ng-bind="ing.name"></h5>
+      <h5 ng-bind="ing.amount"></h5>
+    </div>
+  </div>
+</div>
+<div class="selector-view" ng-show="activeView == 'pac'">
+  <div>
+    <div class="datePickerDiv">
+      <input type="date" ng-model="fromDate">
+      <br>
+      <input type="date" ng-model="toDate">
+      <br>
+      <button ng-click="filterDates()">Get Orders</button>
+    </div>
+  </div>
+  <div ng-repeat="order in data.orderData.orders" class="meal-cont">
+    <h4 ng-bind="order.customer_name"></h4> <br>
+    Order ID: <h5 ng-bind="order.order_id"></h5><br>
+    Delivery ID: <h5 ng-bind="order.delivery_id"></h5>
+    <br>
+    <h5 ng-if="isObject(order.delivery_address)" ng-repeat="(key,value) in order.delivery_address">{{key}}: {{value}}</h5>
+    <h5 ng-if="!isObject(order.delivery_address)"> Collection: {{order.delivery_address}}</h5>
+    <div ng-repeat="meal in order.meals">
+      <h5 ng-bind="meal.name"></h5>
+      <h5 ng-bind="meal.count"></h5>
+    </div>
+  </div>
+</div>
