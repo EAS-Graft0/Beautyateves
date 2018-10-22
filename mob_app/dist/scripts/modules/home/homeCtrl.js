@@ -473,5 +473,8 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
 
     $scope.selectedTreatment = $scope.treatments[0];
 
+    $scope.months = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
 
 }])
