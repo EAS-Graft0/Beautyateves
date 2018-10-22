@@ -14,12 +14,14 @@
           <br>
           <img src="img/nails.jpeg" alt="" style="border-radius: 50%; width: 100px; height: 100px">
         </div>
-        <ion-slides options="options" slider="data.slider">
-          <iom-slide-page ng-repeat="month in months">
-            {{month}}
-          </iom-slide-page>
-        </ion-slides>
         </div>
+          <ion-slides options="options" slider="data.slider">
+            <ion-slide-page ng-repeat="month in months">
+              <!-- <div style="margin: 5px;"> -->
+                {{month}}
+              <!-- </div> -->
+            </ion-slide-page>
+          </ion-slides>
         <!--  -->
         <!--  <ion-slides options="options" slider="data.slider">
         <ion-slide-page ng-repeat="cat in categories">

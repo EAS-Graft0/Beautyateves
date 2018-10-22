@@ -252,200 +252,56 @@ angular.module("mobApp").config(function($stateProvider, $urlRouterProvider) {
         }
     })
 })
-angular.module('mobApp').factory('CustomPlanSvc', ['$http', '$q', function($http, $q) {
-    return {
-        generatePlan: function generatePlan(bmr,goal,ingredients) {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/generatePlan?bmr=' + bmr+'&goal='+goal+'&ingredients='+ingredients,
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        }
-    }
-}])
+angular.module('mobApp').controller('sidemenuCtrl',["$state", "$scope","$ionicModal","$ionicPopup", function ($state, $scope, $ionicModal, $ionicPopup) {
 
-angular.module('mobApp').factory('DataSvc', ['$http', '$q', function($http, $q) {
-    return {
-        getPlans: function getPlans() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getPlans',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
+  $scope.modals = {};
+  $scope.showPopup = function() {
+    $scope.alertPopup = $ionicPopup.alert({
+      title: 'Phone',
+      template: '075 8741 2891',
+      cssClass: 'contactPopup'
+    })
+  }
 
-        getMeals: function getMeals() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getMeals',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
+  $scope.showAbout = function () {
+  $ionicModal.fromTemplateUrl('builder/about_modal.html', {
+      scope: $scope
+      ,animation: 'slide-in-left'
+    }).then(function (modal) {
+      $scope.modals.aboutModal = modal;
+      $scope.modals.aboutModal.show();
+    });
+  }
 
-        getAllergies: function getAllergies() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getAllergies',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
+  $scope.showTerms = function () {
+  $ionicModal.fromTemplateUrl('builder/terms_modal.html', {
+      scope: $scope
+      , animation: 'slide-in-left'
+    }).then(function (modal) {
+      $scope.modals.termModal = modal;
+      $scope.modals.termModal.show();
+    });
+  }
 
-        getShakes: function getShakes() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getShakes',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
+  $scope.showContact = function () {
+  $ionicModal.fromTemplateUrl('builder/contact_modal.html', {
+    scope: $scope
+    , animation: 'slide-in-left'
+  }).then(function (modal) {
+    $scope.modals.contactModal = modal;
+    $scope.modals.contactModal.show();
+    });
+  }
 
-        getSnacks: function getSnacks() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getSnacks',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getIngredients: function getIngredients() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getIngredients',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getMealIngredients: function getMealIngredients() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getMealIngredients',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getAllergyIngredients: function getAllergyIngredients() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getAllergyIngredients',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getMealNutrition: function getMealNutrition() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getMealNutrition',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        addProject: function addProject(body) {
-            var deferred = $q.defer();
-            $http({
-                method: 'POST',
-                url: '/api/addProject',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-                data: JSON.stringify(body)
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        }
-    }
+  $scope.showKitchen = function () {
+  $ionicModal.fromTemplateUrl('builder/kitchen_modal.html', {
+    scope: $scope
+    , animation: 'slide-in-left'
+  }).then(function (modal) {
+    $scope.modals.kitchenModal = modal;
+    $scope.modals.kitchenModal.show();
+  });
+  }
 }])
 
 angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory) {
@@ -886,7 +742,7 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
         loop: true,
         effect: 'slide',
         speed: 250,
-        slidesPerView: 3,
+        slidesPerView: 1,
         centeredSlides: true
     }
 
@@ -905,7 +761,7 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
         $scope.activeIndex = data.slider.activeIndex;
         $scope.previousIndex = data.slider.previousIndex;
         $scope.selectedCat = $scope.categories[data.slider.activeIndex];
-        $scope.$apply()
+        $scope.$apply();
     });
 
 
@@ -939,54 +795,198 @@ angular.module("mobApp").config(function($stateProvider, $urlRouterProvider) {
         }
     })
 })
-angular.module('mobApp').controller('sidemenuCtrl',["$state", "$scope","$ionicModal","$ionicPopup", function ($state, $scope, $ionicModal, $ionicPopup) {
+angular.module('mobApp').factory('CustomPlanSvc', ['$http', '$q', function($http, $q) {
+    return {
+        generatePlan: function generatePlan(bmr,goal,ingredients) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/generatePlan?bmr=' + bmr+'&goal='+goal+'&ingredients='+ingredients,
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        }
+    }
+}])
 
-  $scope.modals = {};
-  $scope.showPopup = function() {
-    $scope.alertPopup = $ionicPopup.alert({
-      title: 'Phone',
-      template: '075 8741 2891',
-      cssClass: 'contactPopup'
-    })
-  }
+angular.module('mobApp').factory('DataSvc', ['$http', '$q', function($http, $q) {
+    return {
+        getPlans: function getPlans() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getPlans',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
 
-  $scope.showAbout = function () {
-  $ionicModal.fromTemplateUrl('builder/about_modal.html', {
-      scope: $scope
-      ,animation: 'slide-in-left'
-    }).then(function (modal) {
-      $scope.modals.aboutModal = modal;
-      $scope.modals.aboutModal.show();
-    });
-  }
+        getMeals: function getMeals() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getMeals',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
 
-  $scope.showTerms = function () {
-  $ionicModal.fromTemplateUrl('builder/terms_modal.html', {
-      scope: $scope
-      , animation: 'slide-in-left'
-    }).then(function (modal) {
-      $scope.modals.termModal = modal;
-      $scope.modals.termModal.show();
-    });
-  }
+        getAllergies: function getAllergies() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getAllergies',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
 
-  $scope.showContact = function () {
-  $ionicModal.fromTemplateUrl('builder/contact_modal.html', {
-    scope: $scope
-    , animation: 'slide-in-left'
-  }).then(function (modal) {
-    $scope.modals.contactModal = modal;
-    $scope.modals.contactModal.show();
-    });
-  }
+        getShakes: function getShakes() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getShakes',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
 
-  $scope.showKitchen = function () {
-  $ionicModal.fromTemplateUrl('builder/kitchen_modal.html', {
-    scope: $scope
-    , animation: 'slide-in-left'
-  }).then(function (modal) {
-    $scope.modals.kitchenModal = modal;
-    $scope.modals.kitchenModal.show();
-  });
-  }
+        getSnacks: function getSnacks() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getSnacks',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getIngredients: function getIngredients() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getIngredients',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getMealIngredients: function getMealIngredients() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getMealIngredients',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getAllergyIngredients: function getAllergyIngredients() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getAllergyIngredients',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getMealNutrition: function getMealNutrition() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getMealNutrition',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        addProject: function addProject(body) {
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                url: '/api/addProject',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+                data: JSON.stringify(body)
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        }
+    }
 }])

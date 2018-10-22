@@ -436,7 +436,7 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
         loop: true,
         effect: 'slide',
         speed: 250,
-        slidesPerView: 3,
+        slidesPerView: 1,
         centeredSlides: true
     }
 
@@ -455,7 +455,7 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
         $scope.activeIndex = data.slider.activeIndex;
         $scope.previousIndex = data.slider.previousIndex;
         $scope.selectedCat = $scope.categories[data.slider.activeIndex];
-        $scope.$apply()
+        $scope.$apply();
     });
 
 
