@@ -6,10 +6,33 @@
     <button class="button button-icon icon ion-bag"></button>
   </ion-nav-buttons>
   <ion-content padding="true" style="background-image: url(''); background-size: cover;">
-    <img src="headerimage">
     <ion-scroll zooming="true" direction="y" style="height: 100%;">
-      <div>
-        content
+      <!--  -->
+      <ion-slides options="options" slider="data.slider">
+        <ion-slide-page ng-repeat="cat in categories">
+          <div style="background: url({{cat.icon}}); background-size: contain;">
+            <!-- <img ng-src="{{cat.icon}}" alt="cat image"> -->
+            <h1 ng-bind="cat.name"></h1>
+          </div>
+        </ion-slide-page>
+      </ion-slides>
+      <!-- <hr> -->
+      <!--  -->
+      <ion-slides></ion-slides>
+      <div class="list">
+        <div class="item item-icon-left item-icon-right" ng-repeat="treatment in treatments" ng-if="treatment.skill_id == selectedCat.id">
+          <div class="icon">
+            <span class=" ion-clock"></span>
+          </div>
+            <small ng-bind="treatment.duration"></small>
+            <h2 ng-bind="treatment.name"></h2>
+          <br>
+          <small style="font-size: 0.5em" ng-bind="treatment.description"></small>
+          <i class="icon ion-social-usd">
+          <small ng-bind="treatment.price"></small>
+            
+          </i>
+        </div>
       </div>
     </ion-scroll>
   </ion-content>
