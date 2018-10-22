@@ -1,4 +1,4 @@
-angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory) {
+angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', '$http', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory, $http) {
     window.homeCtrlScope = $scope;
 
     $scope.selectedCat = 'fdsfds';
@@ -476,5 +476,30 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
     $scope.months = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
+
+    $http.get('/api/getCategories').then((categories) => {
+        console.log('categories');
+        console.log(categories);
+    });
+    $http.get('/api/getTreatments').then((treatments) => {
+        console.log('treatments');
+        console.log(treatments);
+    });
+    $http.get('/api/getRotor').then((rotor) => {
+        console.log('rotor');
+        console.log(rotor);
+    });
+    $http.get('/api/getAvailableSlots').then((availableSlots) => {
+        console.log('availableSlots');
+        console.log(availableSlots);
+    });
+    $http.get('/api/getAvailability').then((availablity) => {
+        console.log('availablity');
+        console.log(availablity);
+    });
+    $http.get('/api/getStaff').then((staff) => {
+        console.log('staff');
+        console.log(staff);
+    });
 
 }])

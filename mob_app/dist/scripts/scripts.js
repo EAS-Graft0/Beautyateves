@@ -12,6 +12,40 @@ angular.module("mobApp").config(function($stateProvider, $urlRouterProvider) {
         }
     })
 })
+angular.module('mobApp').controller('contactCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', '$http', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory, $http) {
+    // window.contact.CtrlScope = $scope;
+
+    $scope.sendMessage = (name, email, message) => {
+        if (validateEmail(email)) {
+            $http.post('/api/sendMessage', {
+                name: name,
+                email: email,
+                message: message
+            }).then((res) => {
+                $scope.messageResponse = res.data;
+            })
+        } else {
+        	$scope.messageResponse = 'Invalid Email';
+        }
+    }
+
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+}])
+angular.module("mobApp").config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider.state('app.contact', {
+        url: "/contact",
+        views: {
+            'menuContent': {
+                templateUrl: "contact/contact.html",
+                controller: 'contactCtrl'
+            }
+        }
+    })
+})
 angular.module('mobApp').controller('checkoutCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', '$http', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory, $http) {
     window.checkoutCtrlScope = $scope;
 
@@ -218,237 +252,7 @@ angular.module('mobApp').controller('checkoutCtrl', ['$state', '$scope', '$state
 
 
 }]);
-angular.module('mobApp').controller('contactCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', '$http', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory, $http) {
-    // window.contact.CtrlScope = $scope;
-
-    $scope.sendMessage = (name, email, message) => {
-        if (validateEmail(email)) {
-            $http.post('/api/sendMessage', {
-                name: name,
-                email: email,
-                message: message
-            }).then((res) => {
-                $scope.messageResponse = res.data;
-            })
-        } else {
-        	$scope.messageResponse = 'Invalid Email';
-        }
-    }
-
-    function validateEmail(email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
-
-}])
-angular.module("mobApp").config(function($stateProvider, $urlRouterProvider) {
-    $stateProvider.state('app.contact', {
-        url: "/contact",
-        views: {
-            'menuContent': {
-                templateUrl: "contact/contact.html",
-                controller: 'contactCtrl'
-            }
-        }
-    })
-})
-angular.module('mobApp').factory('CustomPlanSvc', ['$http', '$q', function($http, $q) {
-    return {
-        generatePlan: function generatePlan(bmr,goal,ingredients) {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/generatePlan?bmr=' + bmr+'&goal='+goal+'&ingredients='+ingredients,
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        }
-    }
-}])
-
-angular.module('mobApp').factory('DataSvc', ['$http', '$q', function($http, $q) {
-    return {
-        getPlans: function getPlans() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getPlans',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getMeals: function getMeals() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getMeals',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getAllergies: function getAllergies() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getAllergies',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getShakes: function getShakes() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getShakes',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getSnacks: function getSnacks() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getSnacks',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getIngredients: function getIngredients() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getIngredients',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getMealIngredients: function getMealIngredients() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getMealIngredients',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getAllergyIngredients: function getAllergyIngredients() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getAllergyIngredients',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        getMealNutrition: function getMealNutrition() {
-            var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/getMealNutrition',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        },
-
-        addProject: function addProject(body) {
-            var deferred = $q.defer();
-            $http({
-                method: 'POST',
-                url: '/api/addProject',
-                dataType: 'json',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-                data: JSON.stringify(body)
-            }).then(function(res) {
-                deferred.resolve(res.data)
-            }, function(res) {
-                deferred.resolve(res.data)
-            })
-            return deferred.promise;
-        }
-    }
-}])
-
-angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory) {
+angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', '$http', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory, $http) {
     window.homeCtrlScope = $scope;
 
     $scope.selectedCat = 'fdsfds';
@@ -927,6 +731,31 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
         "July", "August", "September", "October", "November", "December"
     ];
 
+    $http.get('/api/getCategories').then((categories) => {
+        console.log('categories');
+        console.log(categories);
+    });
+    $http.get('/api/getTreatments').then((treatments) => {
+        console.log('treatments');
+        console.log(treatments);
+    });
+    $http.get('/api/getRotor').then((rotor) => {
+        console.log('rotor');
+        console.log(rotor);
+    });
+    $http.get('/api/getAvailableSlots').then((availableSlots) => {
+        console.log('availableSlots');
+        console.log(availableSlots);
+    });
+    $http.get('/api/getAvailability').then((availablity) => {
+        console.log('availablity');
+        console.log(availablity);
+    });
+    $http.get('/api/getStaff').then((staff) => {
+        console.log('staff');
+        console.log(staff);
+    });
+
 }])
 angular.module("mobApp").config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state('app.home', {
@@ -939,6 +768,202 @@ angular.module("mobApp").config(function($stateProvider, $urlRouterProvider) {
         }
     })
 })
+angular.module('mobApp').factory('CustomPlanSvc', ['$http', '$q', function($http, $q) {
+    return {
+        generatePlan: function generatePlan(bmr,goal,ingredients) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/generatePlan?bmr=' + bmr+'&goal='+goal+'&ingredients='+ingredients,
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        }
+    }
+}])
+
+angular.module('mobApp').factory('DataSvc', ['$http', '$q', function($http, $q) {
+    return {
+        getPlans: function getPlans() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getPlans',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getMeals: function getMeals() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getMeals',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getAllergies: function getAllergies() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getAllergies',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getShakes: function getShakes() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getShakes',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getSnacks: function getSnacks() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getSnacks',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getIngredients: function getIngredients() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getIngredients',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getMealIngredients: function getMealIngredients() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getMealIngredients',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getAllergyIngredients: function getAllergyIngredients() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getAllergyIngredients',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        getMealNutrition: function getMealNutrition() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/getMealNutrition',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        },
+
+        addProject: function addProject(body) {
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                url: '/api/addProject',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+                data: JSON.stringify(body)
+            }).then(function(res) {
+                deferred.resolve(res.data)
+            }, function(res) {
+                deferred.resolve(res.data)
+            })
+            return deferred.promise;
+        }
+    }
+}])
+
 angular.module('mobApp').controller('sidemenuCtrl',["$state", "$scope","$ionicModal","$ionicPopup", function ($state, $scope, $ionicModal, $ionicPopup) {
 
   $scope.modals = {};
