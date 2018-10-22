@@ -404,7 +404,6 @@
 .meal-cont>div>h5 {
   color: black;
 }
-/* CSS for view voucher  Start all of your class names for this view with voucher*/
 .backdrop-main {
   position: fixed;
   top: 0;
@@ -479,6 +478,7 @@
     box-shadow: none;
   }
 }
+/* CSS for view voucher  Start all of your class names for this view with voucher*/
 /*.backdrop-main {
     position: fixed;
     top: 0;

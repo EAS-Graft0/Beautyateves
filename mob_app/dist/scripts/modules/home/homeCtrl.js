@@ -2,6 +2,8 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
     window.homeCtrlScope = $scope;
 
     $scope.selectedCat = 'fdsfds';
+    $scope.modals = {};
+
     $scope.categories = [{
         "id": 1,
         "name": "Wax",
@@ -432,8 +434,10 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
 
     $scope.options = {
         loop: true,
-        effect: 'fade',
+        effect: 'slide',
         speed: 250,
+        slidesPerView: 3,
+        centeredSlides: true
     }
 
     $scope.$on("$ionicSlides.sliderInitialized", function(event, data) {
@@ -455,6 +459,19 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
     });
 
 
+    $scope.bookTreatment = (treatment) => {
+        $ionicModal.fromTemplateUrl('booking/booking.html', {
+            scope: $scope,
+            animation: 'slide-in-left'
+        }).then(function(modal) {
+            $scope.modals.bookingModal = modal;
+            $scope.modals.bookingModal.show();
+            $scope.selectedTreatment = treatment;
+        });
+    };
+
+
+    $scope.selectedTreatment = $scope.treatments[0];
 
 
 }])

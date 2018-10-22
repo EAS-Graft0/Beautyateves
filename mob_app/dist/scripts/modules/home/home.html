@@ -5,40 +5,45 @@
   <ion-nav-buttons side="right" style="background-color:#ffd3c8;">
     <button class="button button-icon icon ion-bag"></button>
   </ion-nav-buttons>
-  <ion-content padding="true" style="background-image: url(''); background-size: cover;">
+  <ion-content padding="false" style="background-image: url(''); background-size: cover;">
     <ion-scroll zooming="true" direction="y" style="height: 100%;">
-      <!--  -->
-      <ion-slides options="options" slider="data.slider">
+      <div class="item" style="height: 35vh; background: url(img/salon.jpeg); background-size: cover;">
+        <div><br></div>
+        <div ng-bind="selectedTreatment.name" class="text-center" style="color: white;"></div>
+        <div class="text-center">
+          <br>
+          <img src="img/nails.jpeg" alt="" style="border-radius: 50%; width: 100px; height: 100px">
+        </div>
+        <ion-slides options="options" slider="data.slider">
+          <iom-slide-page ng-repeat="treatment in treatments">
+            Dates
+          </iom-slide-page>
+        </ion-slides>
+        </div>
+        <!--  -->
+        <!--  <ion-slides options="options" slider="data.slider">
         <ion-slide-page ng-repeat="cat in categories">
           <div style="background: url({{cat.icon}}); background-size: contain;">
-            <!-- <img ng-src="{{cat.icon}}" alt="cat image"> -->
             <h1 ng-bind="cat.name"></h1>
           </div>
         </ion-slide-page>
       </ion-slides>
-      <!-- <hr> -->
-      <!--  -->
-      <ion-slides></ion-slides>
       <div class="list">
-        <div class="item item-icon-left item-icon-right" ng-repeat="treatment in treatments" ng-if="treatment.skill_id == selectedCat.id">
-          <div class="icon">
-            <span class=" ion-clock"></span>
-          </div>
-            <small ng-bind="treatment.duration"></small>
-            <h2 ng-bind="treatment.name"></h2>
+        <div class="item item-icon-left item-icon-right" ng-repeat="treatment in treatments" ng-if="treatment.skill_id == selectedCat.id" ng-click="bookTreatment(treatment)">
+          <i class="icon ion-clock"> </i>
+          <small ng-bind="treatment.duration"></small>
+          <h2 ng-bind="treatment.name"></h2>
           <br>
           <small style="font-size: 0.5em" ng-bind="treatment.description"></small>
-          <i class="icon ion-social-usd">
-          <small ng-bind="treatment.price"></small>
-            
-          </i>
+          <i class="icon ion-social-usd"> <small ng-bind="treatment.price"></small> </i>
         </div>
-      </div>
+      </div> -->
+        <!--  -->
     </ion-scroll>
   </ion-content>
-  <div class="bar bar-footer bar-dark">
+  <!--   <div class="bar bar-footer bar-dark">
     <div style="margin: 0 auto;">
       footer
     </div>
-  </div>
+  </div> -->
 </ion-view>

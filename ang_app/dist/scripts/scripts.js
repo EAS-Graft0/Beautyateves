@@ -725,6 +725,106 @@ angular.module("webApp").config(["$routeProvider", function(routeProv) {
         controller: "adminCtrl"
     })
 }])
+angular.module('webApp').controller('ordersCtrl', ['$scope', '$http', function($scope, $http) {
+    window.ordersCtrlScope = $scope
+    $scope.activeView = 'pre';
+    $scope.setActive = function(targ) {
+        $scope.activeView = targ;
+    };
+    $scope.fromDate = new Date()
+    $scope.toDate = new Date()
+$scope.data = {}
+    $scope.mealNames = {};
+    $scope.today = new Date();
+
+    $scope.filterDates = () => {
+        $scope.getData($scope.fromDate, $scope.toDate);
+    }
+
+    
+    
+    $scope.getData = (fromDate, toDate) => {
+        fromDate = fromDate.toISOString().substring(0, 10)
+        toDate = toDate.toISOString().substring(0, 10)
+        $http.get('/api/getDeliveryIngredients?fromDate=' + fromDate + '&toDate=' + toDate).then((res) => {
+            $scope.data.orderData = res.data
+            for(order in $scope.data.orderData.orders){
+                if($scope.data.orderData.orders[order].delivery_address.indexOf('{') != -1){
+                    $scope.data.orderData.orders[order].delivery_address = JSON.parse($scope.data.orderData.orders[order].delivery_address)
+                }
+            }
+        })
+    }
+
+    $scope.getData(new Date(), new Date())
+
+
+
+
+    // $scope.getMeals();
+
+    // $scope.meals[$]
+
+}])
+angular.module("webApp").config(["$routeProvider", function(routeProv) {
+    routeProv.when("/orders", {
+        title: "orders",
+        templateUrl: "orders/orders.html",
+        controller: "ordersCtrl"
+    })
+}])
+angular.module('webApp').controller('loginCtrl', ['$scope', '$http', 'SessionService', '$window', '$rootScope', function($scope, $http, SessionService, $window, $rootScope) {
+    window.loginCtrlScope = $scope
+    $scope.login = ($event, email, password) => {
+        if ($event.keyCode == 13) {
+            SessionService.login({
+                "username": email,
+                "password": password
+            }).then((loginResult) => {
+                if (!loginResult.error) {
+                    window.sessionStorage.token = loginResult.token;
+                    // deferred.resolve(loginResult);
+                    // $rootScope.login = false;
+                    $window.location.href = $rootScope.targetPage
+                } else {
+                    alert(loginResult.error)
+                }
+            })
+        } else if ($event.type == 'click') {
+            SessionService.login({
+                "username": email,
+                "password": password
+            }).then((loginResult) => {
+                // console.log(loginResult);
+                if (!loginResult.error) {
+                    window.sessionStorage.token = loginResult.token;
+                    // deferred.resolve(loginResult);
+                    // $rootScope.login = false;
+                    $window.location.href = loginResult.location
+                } else {
+                    alert(loginResult.error)
+                }
+            })
+        }
+    }
+}])
+angular.module("webApp").config(["$routeProvider", function(routeProv) {
+    routeProv.when("/login", {
+        title: "login",
+        templateUrl: "login/login.html",
+        controller: "loginCtrl"
+    })
+}])
+angular.module('webApp').controller('voucherCtrl', ['$scope', '$http', function ($scope, $http) {
+    window.voucherCtrlScope = $scope
+}])
+angular.module("webApp").config(["$routeProvider", function(routeProv) {
+    routeProv.when("/voucher", {
+        title: "voucher",
+        templateUrl: "voucher/voucher.html",
+        controller: "voucherCtrl"
+    })
+}])
 angular.module("webApp").factory("DataSvc", [
     "$http",
     "$q",
@@ -1288,106 +1388,6 @@ angular.module("webApp").factory("SessionService", [
         };
     }
 ]);
-angular.module('webApp').controller('ordersCtrl', ['$scope', '$http', function($scope, $http) {
-    window.ordersCtrlScope = $scope
-    $scope.activeView = 'pre';
-    $scope.setActive = function(targ) {
-        $scope.activeView = targ;
-    };
-    $scope.fromDate = new Date()
-    $scope.toDate = new Date()
-$scope.data = {}
-    $scope.mealNames = {};
-    $scope.today = new Date();
-
-    $scope.filterDates = () => {
-        $scope.getData($scope.fromDate, $scope.toDate);
-    }
-
-    
-    
-    $scope.getData = (fromDate, toDate) => {
-        fromDate = fromDate.toISOString().substring(0, 10)
-        toDate = toDate.toISOString().substring(0, 10)
-        $http.get('/api/getDeliveryIngredients?fromDate=' + fromDate + '&toDate=' + toDate).then((res) => {
-            $scope.data.orderData = res.data
-            for(order in $scope.data.orderData.orders){
-                if($scope.data.orderData.orders[order].delivery_address.indexOf('{') != -1){
-                    $scope.data.orderData.orders[order].delivery_address = JSON.parse($scope.data.orderData.orders[order].delivery_address)
-                }
-            }
-        })
-    }
-
-    $scope.getData(new Date(), new Date())
-
-
-
-
-    // $scope.getMeals();
-
-    // $scope.meals[$]
-
-}])
-angular.module("webApp").config(["$routeProvider", function(routeProv) {
-    routeProv.when("/orders", {
-        title: "orders",
-        templateUrl: "orders/orders.html",
-        controller: "ordersCtrl"
-    })
-}])
-angular.module('webApp').controller('voucherCtrl', ['$scope', '$http', function ($scope, $http) {
-    window.voucherCtrlScope = $scope
-}])
-angular.module("webApp").config(["$routeProvider", function(routeProv) {
-    routeProv.when("/voucher", {
-        title: "voucher",
-        templateUrl: "voucher/voucher.html",
-        controller: "voucherCtrl"
-    })
-}])
-angular.module('webApp').controller('loginCtrl', ['$scope', '$http', 'SessionService', '$window', '$rootScope', function($scope, $http, SessionService, $window, $rootScope) {
-    window.loginCtrlScope = $scope
-    $scope.login = ($event, email, password) => {
-        if ($event.keyCode == 13) {
-            SessionService.login({
-                "username": email,
-                "password": password
-            }).then((loginResult) => {
-                if (!loginResult.error) {
-                    window.sessionStorage.token = loginResult.token;
-                    // deferred.resolve(loginResult);
-                    // $rootScope.login = false;
-                    $window.location.href = $rootScope.targetPage
-                } else {
-                    alert(loginResult.error)
-                }
-            })
-        } else if ($event.type == 'click') {
-            SessionService.login({
-                "username": email,
-                "password": password
-            }).then((loginResult) => {
-                // console.log(loginResult);
-                if (!loginResult.error) {
-                    window.sessionStorage.token = loginResult.token;
-                    // deferred.resolve(loginResult);
-                    // $rootScope.login = false;
-                    $window.location.href = loginResult.location
-                } else {
-                    alert(loginResult.error)
-                }
-            })
-        }
-    }
-}])
-angular.module("webApp").config(["$routeProvider", function(routeProv) {
-    routeProv.when("/login", {
-        title: "login",
-        templateUrl: "login/login.html",
-        controller: "loginCtrl"
-    })
-}])
 angular.module('webApp').directive('login', ['SessionService', '$timeout', '$rootScope', function(SessionService, $timeout, $rootScope) {
     return {
         templateUrl: 'directives/login/login.html',
