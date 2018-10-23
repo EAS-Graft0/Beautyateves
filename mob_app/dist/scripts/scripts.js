@@ -12,6 +12,40 @@ angular.module("mobApp").config(function($stateProvider, $urlRouterProvider) {
         }
     })
 })
+angular.module('mobApp').controller('contactCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', '$http', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory, $http) {
+    // window.contact.CtrlScope = $scope;
+
+    $scope.sendMessage = (name, email, message) => {
+        if (validateEmail(email)) {
+            $http.post('/api/sendMessage', {
+                name: name,
+                email: email,
+                message: message
+            }).then((res) => {
+                $scope.messageResponse = res.data;
+            })
+        } else {
+        	$scope.messageResponse = 'Invalid Email';
+        }
+    }
+
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+}])
+angular.module("mobApp").config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider.state('app.contact', {
+        url: "/contact",
+        views: {
+            'menuContent': {
+                templateUrl: "contact/contact.html",
+                controller: 'contactCtrl'
+            }
+        }
+    })
+})
 angular.module('mobApp').controller('checkoutCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', '$http', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory, $http) {
     window.checkoutCtrlScope = $scope;
 
@@ -218,93 +252,7 @@ angular.module('mobApp').controller('checkoutCtrl', ['$state', '$scope', '$state
 
 
 }]);
-angular.module('mobApp').controller('contactCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', '$http', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory, $http) {
-    // window.contact.CtrlScope = $scope;
-
-    $scope.sendMessage = (name, email, message) => {
-        if (validateEmail(email)) {
-            $http.post('/api/sendMessage', {
-                name: name,
-                email: email,
-                message: message
-            }).then((res) => {
-                $scope.messageResponse = res.data;
-            })
-        } else {
-        	$scope.messageResponse = 'Invalid Email';
-        }
-    }
-
-    function validateEmail(email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
-
-}])
-angular.module("mobApp").config(function($stateProvider, $urlRouterProvider) {
-    $stateProvider.state('app.contact', {
-        url: "/contact",
-        views: {
-            'menuContent': {
-                templateUrl: "contact/contact.html",
-                controller: 'contactCtrl'
-            }
-        }
-    })
-})
-angular.module('mobApp').controller('sidemenuCtrl',["$state", "$scope","$ionicModal","$ionicPopup", function ($state, $scope, $ionicModal, $ionicPopup) {
-
-  $scope.modals = {};
-  $scope.showPopup = function() {
-    $scope.alertPopup = $ionicPopup.alert({
-      title: 'Phone',
-      template: '075 8741 2891',
-      cssClass: 'contactPopup'
-    })
-  }
-
-  $scope.showAbout = function () {
-  $ionicModal.fromTemplateUrl('builder/about_modal.html', {
-      scope: $scope
-      ,animation: 'slide-in-left'
-    }).then(function (modal) {
-      $scope.modals.aboutModal = modal;
-      $scope.modals.aboutModal.show();
-    });
-  }
-
-  $scope.showTerms = function () {
-  $ionicModal.fromTemplateUrl('builder/terms_modal.html', {
-      scope: $scope
-      , animation: 'slide-in-left'
-    }).then(function (modal) {
-      $scope.modals.termModal = modal;
-      $scope.modals.termModal.show();
-    });
-  }
-
-  $scope.showContact = function () {
-  $ionicModal.fromTemplateUrl('builder/contact_modal.html', {
-    scope: $scope
-    , animation: 'slide-in-left'
-  }).then(function (modal) {
-    $scope.modals.contactModal = modal;
-    $scope.modals.contactModal.show();
-    });
-  }
-
-  $scope.showKitchen = function () {
-  $ionicModal.fromTemplateUrl('builder/kitchen_modal.html', {
-    scope: $scope
-    , animation: 'slide-in-left'
-  }).then(function (modal) {
-    $scope.modals.kitchenModal = modal;
-    $scope.modals.kitchenModal.show();
-  });
-  }
-}])
-
-angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory) {
+angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', '$http', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory, $http) {
     window.homeCtrlScope = $scope;
 
     $scope.selectedCat = 'fdsfds';
@@ -783,6 +731,31 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
         "July", "August", "September", "October", "November", "December"
     ];
 
+    $http.get('/api/getCategories').then((categories) => {
+        console.log('categories');
+        console.log(categories);
+    });
+    $http.get('/api/getTreatments').then((treatments) => {
+        console.log('treatments');
+        console.log(treatments);
+    });
+    $http.get('/api/getRotor').then((rotor) => {
+        console.log('rotor');
+        console.log(rotor);
+    });
+    $http.get('/api/getAvailableSlots').then((availableSlots) => {
+        console.log('availableSlots');
+        console.log(availableSlots);
+    });
+    $http.get('/api/getAvailability').then((availablity) => {
+        console.log('availablity');
+        console.log(availablity);
+    });
+    $http.get('/api/getStaff').then((staff) => {
+        console.log('staff');
+        console.log(staff);
+    });
+
 }])
 angular.module("mobApp").config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state('app.home', {
@@ -989,4 +962,56 @@ angular.module('mobApp').factory('DataSvc', ['$http', '$q', function($http, $q) 
             return deferred.promise;
         }
     }
+}])
+
+angular.module('mobApp').controller('sidemenuCtrl',["$state", "$scope","$ionicModal","$ionicPopup", function ($state, $scope, $ionicModal, $ionicPopup) {
+
+  $scope.modals = {};
+  $scope.showPopup = function() {
+    $scope.alertPopup = $ionicPopup.alert({
+      title: 'Phone',
+      template: '075 8741 2891',
+      cssClass: 'contactPopup'
+    })
+  }
+
+  $scope.showAbout = function () {
+  $ionicModal.fromTemplateUrl('builder/about_modal.html', {
+      scope: $scope
+      ,animation: 'slide-in-left'
+    }).then(function (modal) {
+      $scope.modals.aboutModal = modal;
+      $scope.modals.aboutModal.show();
+    });
+  }
+
+  $scope.showTerms = function () {
+  $ionicModal.fromTemplateUrl('builder/terms_modal.html', {
+      scope: $scope
+      , animation: 'slide-in-left'
+    }).then(function (modal) {
+      $scope.modals.termModal = modal;
+      $scope.modals.termModal.show();
+    });
+  }
+
+  $scope.showContact = function () {
+  $ionicModal.fromTemplateUrl('builder/contact_modal.html', {
+    scope: $scope
+    , animation: 'slide-in-left'
+  }).then(function (modal) {
+    $scope.modals.contactModal = modal;
+    $scope.modals.contactModal.show();
+    });
+  }
+
+  $scope.showKitchen = function () {
+  $ionicModal.fromTemplateUrl('builder/kitchen_modal.html', {
+    scope: $scope
+    , animation: 'slide-in-left'
+  }).then(function (modal) {
+    $scope.modals.kitchenModal = modal;
+    $scope.modals.kitchenModal.show();
+  });
+  }
 }])

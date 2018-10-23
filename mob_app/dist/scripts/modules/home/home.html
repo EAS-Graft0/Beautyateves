@@ -7,23 +7,7 @@
   </ion-nav-buttons>
   <ion-content padding="false" style="background-image: url(''); background-size: cover;">
     <ion-scroll zooming="true" direction="y" style="height: 100%;">
-      <div class="item" style="height: 35vh; background: url(img/salon.jpeg); background-size: cover;">
-        <div><br></div>
-        <div ng-bind="selectedTreatment.name" class="text-center" style="color: white;"></div>
-        <div class="text-center">
-          <br>
-          <img src="img/nails.jpeg" alt="" style="border-radius: 50%; width: 100px; height: 100px">
-        </div>
-        </div>
-          <ion-slides options="options" slider="data.slider">
-            <ion-slide-page ng-repeat="month in months">
-              <!-- <div style="margin: 5px;"> -->
-                {{month}}
-              <!-- </div> -->
-            </ion-slide-page>
-          </ion-slides>
-        <!--  -->
-        <!--  <ion-slides options="options" slider="data.slider">
+      <ion-slides options="options" slider="data.slider">
         <ion-slide-page ng-repeat="cat in categories">
           <div style="background: url({{cat.icon}}); background-size: contain;">
             <h1 ng-bind="cat.name"></h1>
@@ -39,13 +23,7 @@
           <small style="font-size: 0.5em" ng-bind="treatment.description"></small>
           <i class="icon ion-social-usd"> <small ng-bind="treatment.price"></small> </i>
         </div>
-      </div> -->
-        <!--  -->
+      </div>
     </ion-scroll>
   </ion-content>
-  <!--   <div class="bar bar-footer bar-dark">
-    <div style="margin: 0 auto;">
-      footer
-    </div>
-  </div> -->
 </ion-view>
