@@ -520,11 +520,11 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$timeout', '$scope',
         console.log('rotor');
         console.log(rotor);
     });
-    $http.get('/api/getAvailableSlots').then((availableSlots) => {
+    $http.get('/api/getAvailableSlots?skill_id=1').then((availableSlots) => {
         console.log('availableSlots');
         console.log(availableSlots);
     });
-    $http.get('/api/getAvailability').then((availablity) => {
+    $http.get('/api/getAvailability?skill_id=1').then((availablity) => {
         console.log('availablity');
         console.log(availablity);
     });
@@ -534,7 +534,7 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$timeout', '$scope',
     });
 
     $scope.selectedCat = $scope.categories[0];
-    
+
 
 
 }])
