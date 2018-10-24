@@ -1,7 +1,6 @@
-angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', '$http', function($state, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory, $http) {
+angular.module('mobApp').controller('homeCtrl', ['$state', '$timeout', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$ionicHistory', '$http', function($state, $timeout, $scope, $stateParams, $ionicPopup, $ionicModal, $ionicHistory, $http) {
     window.homeCtrlScope = $scope;
 
-    $scope.selectedCat = 'fdsfds';
     $scope.modals = {};
 
     $scope.categories = [{
@@ -431,33 +430,65 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
         "icon": null
     }];
 
+    //
+    // $scope.monthOptions = {
+    //   loop: true,
+    //   effect: 'slide',
+    //   speed: 250,
+    //   slidesPerView: 1,
+    //   centeredSlides: true
+    // }
 
-    $scope.options = {
-        loop: true,
+    $scope.dayOptions = {
+        loop: false,
         effect: 'slide',
         speed: 250,
-        slidesPerView: 1,
-        centeredSlides: true
+        slidesPerView: 7,
+        centeredSlides: true,
+        onInit: function(swiper) {
+            $scope.swiper = swiper;
+        },
+        onSlideChangeEnd: function(swiper) {
+            console.log('The active index is ' + swiper.activeIndex);
+            getAvailableInDay()
+        }
     }
 
-    $scope.$on("$ionicSlides.sliderInitialized", function(event, data) {
-        // data.slider is the instance of Swiper
-        $scope.slider = data.slider;
-        $scope.selectedCat = $scope.categories[$scope.slider.activeIndex];
-    });
+    var dateObj = {
+        0: 'SUN',
+        1: 'MON',
+        2: 'TUE',
+        3: 'WED',
+        4: 'THU',
+        5: 'FRI',
+        6: 'SAT'
+    }
 
-    $scope.$on("$ionicSlides.slideChangeStart", function(event, data) {
-        console.log('Slide change is beginning');
-    });
+    $scope.availableBookings = []
 
-    $scope.$on("$ionicSlides.slideChangeEnd", function(event, data) {
-        // note: the indexes are 0-based
-        $scope.activeIndex = data.slider.activeIndex;
-        $scope.previousIndex = data.slider.previousIndex;
-        $scope.selectedCat = $scope.categories[data.slider.activeIndex];
-        $scope.$apply();
-    });
+    function getAvailableInDay() {
+        delete $scope.availableBookings;
+        $timeout(function() {
+            $scope.availableBookings = []
+        }, 1000)
+        $scope.$apply()
+    }
 
+    function getDaysInMonth(month, year) {
+        var date = new Date(year, month, 1);
+        $scope.days = [];
+        // console.log('month', month, 'date.getMonth()', date.getMonth())
+        while (date.getMonth() === month) {
+            $scope.days.push({
+                day: dateObj[new Date(date).getDay()],
+                date: new Date(date).getDate()
+            });
+            date.setDate(date.getDate() + 1);
+        }
+        // return $scope.days;
+    }
+
+    getDaysInMonth(9, 2018)
 
     $scope.bookTreatment = (treatment) => {
         $ionicModal.fromTemplateUrl('booking/booking.html', {
@@ -501,5 +532,9 @@ angular.module('mobApp').controller('homeCtrl', ['$state', '$scope', '$statePara
         console.log('staff');
         console.log(staff);
     });
+
+    $scope.selectedCat = $scope.categories[0];
+    
+
 
 }])

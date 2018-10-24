@@ -337,73 +337,6 @@
     position: absolute;
   }
 }
-.selector-container {
-  position: absolute;
-  text-align: center;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  height: 100px;
-  color: white;
-  background: #67c9c9;
-}
-
-.selector {
-  width: 30vw;
-  display: inline-block;
-  height: 100%;
-  line-height: 75px;
-  font-size: 35px;
-  border-bottom: 15px solid #35ccca;
-  cursor: pointer;
-}
-
-.selector.active {
-  background: #27a5a3;
-  border-bottom: 15px solid #2b8c8b;
-}
-
-.selector-view {
-  position: absolute;
-  top: 100px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-}
-
-.meal-cont {
-  color: black;
-  padding: 20px;
-}
-
-.meal-cont>h4 {
-  color: black;
-  font-size: 30px;
-  display: inline-block;
-}
-
-.meal-cont>h5 {
-  color: black;
-  /*margin-left: 20px;*/
-  display: inline-block;
-}
-
-.meal-cont>div {
-  color: black;
-  display: inline-block;
-  padding: 10px;
-  text-align: center;
-  background: #ececec;
-  margin: 5px 10px;
-}
-
-.meal-cont>div>h4 {
-  color: black;
-}
-
-.meal-cont>div>h5 {
-  color: black;
-}
 .backdrop-main {
   position: fixed;
   top: 0;
@@ -477,6 +410,73 @@
   .login-modal {
     box-shadow: none;
   }
+}
+.selector-container {
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 100px;
+  color: white;
+  background: #67c9c9;
+}
+
+.selector {
+  width: 30vw;
+  display: inline-block;
+  height: 100%;
+  line-height: 75px;
+  font-size: 35px;
+  border-bottom: 15px solid #35ccca;
+  cursor: pointer;
+}
+
+.selector.active {
+  background: #27a5a3;
+  border-bottom: 15px solid #2b8c8b;
+}
+
+.selector-view {
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.meal-cont {
+  color: black;
+  padding: 20px;
+}
+
+.meal-cont>h4 {
+  color: black;
+  font-size: 30px;
+  display: inline-block;
+}
+
+.meal-cont>h5 {
+  color: black;
+  /*margin-left: 20px;*/
+  display: inline-block;
+}
+
+.meal-cont>div {
+  color: black;
+  display: inline-block;
+  padding: 10px;
+  text-align: center;
+  background: #ececec;
+  margin: 5px 10px;
+}
+
+.meal-cont>div>h4 {
+  color: black;
+}
+
+.meal-cont>div>h5 {
+  color: black;
 }
 /* CSS for view voucher  Start all of your class names for this view with voucher*/
 /*.backdrop-main {

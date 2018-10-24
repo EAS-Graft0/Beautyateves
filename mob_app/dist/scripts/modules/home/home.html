@@ -16,6 +16,7 @@
       </ion-slides>
       <div class="list">
         <div class="item item-icon-left item-icon-right" ng-repeat="treatment in treatments" ng-if="treatment.skill_id == selectedCat.id" ng-click="bookTreatment(treatment)">
+          {{treatment}}
           <i class="icon ion-clock"> </i>
           <small ng-bind="treatment.duration"></small>
           <h2 ng-bind="treatment.name"></h2>
